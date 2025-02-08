@@ -1,0 +1,27 @@
+.aside {
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background-color: #443b3b;
+
+
+  &__links {
+    display: flex;
+    flex-direction: column;
+    height: 85vh;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__link {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 20px;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}

@@ -1,0 +1,14 @@
+$text-white-color: #fff;
+
+html {
+  font-family: "Playfair Display", serif;
+  background-color: #FFFEFC;
+
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: $text-white-color;
+  box-sizing: border-box;
+}

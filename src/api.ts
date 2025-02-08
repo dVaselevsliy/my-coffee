@@ -7,3 +7,8 @@ export function getCoffee() {
       throw new Error('Loading error')
     })
 }
+
+export function getSomeProduct(coffeeId: number) {
+  return fetch(`${API_URL}/${coffeeId}`)
+    .then((res) => res.json())
+}
