@@ -66,35 +66,35 @@ export const AboutUsPage = () => {
             <a className="header__order-text" href="#">Learn More</a>
           </div>
         </div>
-        <img className="about-us__image" src='/public/coffee-image.png' alt="coffee-image" />
+        <img className="about-us__image" src='./coffee-image.png' alt="coffee-image" />
       </div>
         <div className="why-we-different">
-            <img className="why-we-different__coffee-image" src='/public/coffee-blast.png' alt="coffee-image" />
+            <img className="why-we-different__coffee-image" src='./coffee-blast.png' alt="coffee-image" />
             <h2 className="why-we-different__title">Why are we different?</h2>
             <p className="why-we-different__text about-us__paragraf">We don’t just make your coffee, we make your day!</p>
       </div>
       
       <div className="section">
         <div className="section__container">
-          <img className="section__image" src='/public/coffee-beans.png' alt="coffee-beans" />
+          <img className="section__image" src='./coffee-beans.png' alt="coffee-beans" />
             <h5 className="section__title">Supreme Beans</h5>
             <p className="section__text">Beans that provides great taste</p>
         </div>
 
         <div className="section__container">
-          <img className="section__image" src='/public/badge.png' alt="badge" />
+          <img className="section__image" src='./badge.png' alt="badge" />
             <h5 className="section__title">High Quality</h5>
             <p className="section__text">We provide the highest quality</p>
         </div>
 
         <div className="section__container">
-          <img className="section__image" src='/public/coffee-cup.png' alt="coffee-cup" />
+          <img className="section__image" src='./coffee-cup.png' alt="coffee-cup" />
             <h5 className="section__title">Extraordinary</h5>
             <p className="section__text">Coffee like you have never tasted</p>
         </div>
 
         <div className="section__container">
-          <img className="section__image" src='/public/best-price.png' alt="best-price" />
+          <img className="section__image" src='./best-price.png' alt="best-price" />
             <h5 className="section__title">Affordable Price</h5>
             <p className="section__text">Our Coffee prices are easy to afford</p>
         </div>
@@ -118,8 +118,8 @@ export const AboutUsPage = () => {
         </div>
 
         <div className="order-section__image">
-          <img className="order-section__coffee-cup" src="/public/cup.png" alt="coffee-cup" />
-          <img className="order-section__coffee-bean" src="/public/many-coffee-bean.png" alt="coffee-bean" />
+          <img className="order-section__coffee-cup" src="./cup.png" alt="coffee-cup" />
+          <img className="order-section__coffee-bean" src="./many-coffee-bean.png" alt="coffee-bean" />
         </div>
       </div>
       <div className="about-us-carousel">
@@ -132,38 +132,38 @@ export const AboutUsPage = () => {
         }}
           className="about-us-carousel__container">
           <div className="item">
-            <img className="about-us-carousel__icon-six" src="/public/six-six.png" alt="six-six logo" />
+            <img className="about-us-carousel__icon-six" src="./six-six.png" alt="six-six logo" />
             <div className="about-us-carousel__content">
               <p className="about-us-carousel__paragraf">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset.....</p>
             </div>
             <div className="about-us-carousel__person-info">
               <h3 className="why-we-different__title about-us-carousel__name">Jonny Thomas</h3>
               <p className="why-we-different__text about-us-carousel__position">Project Manager</p>
-              <img className="about-us-carousel__person-photo" src="/public/person-photo.png" alt="person photo" />
+              <img className="about-us-carousel__person-photo" src="./person-photo.png" alt="person photo" />
             </div>
           </div>
 
             <div className="item">
-              <img className="about-us-carousel__icon-six" src="/public/six-six.png" alt="six-six logo" />
+              <img className="about-us-carousel__icon-six" src="./six-six.png" alt="six-six logo" />
               <div className="about-us-carousel__content">
                 <p className="about-us-carousel__paragraf">World's simplest online Portable Network Graphics (PNG) background adder. Just import your PNG image in the editor on the left and you'll instantly get a PNG with a new background on the right. Free, quick, and very powerful. Import a transparent PNG – create a PNG with a background. Created with love by team Browserling.</p>
               </div>
               <div className="about-us-carousel__person-info">
                 <h3 className="why-we-different__title about-us-carousel__name">Ryan Gosling</h3>
                 <p className="why-we-different__text about-us-carousel__position">Driver</p>
-                <img className="about-us-carousel__person-photo" src="/public/ryan-gosling.jpg" alt="person photo" />
+                <img className="about-us-carousel__person-photo" src="./ryan-gosling.jpg" alt="person photo" />
               </div>
             </div>
           
           <div className="item">
-            <img className="about-us-carousel__icon-six" src="/public/six-six.png" alt="six-six logo" />
+            <img className="about-us-carousel__icon-six" src="./six-six.png" alt="six-six logo" />
             <div className="about-us-carousel__content">
               <p className="about-us-carousel__paragraf">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset.....</p>
             </div>
             <div className="about-us-carousel__person-info">
               <h3 className="why-we-different__title about-us-carousel__name">Jonny Thomas</h3>
               <p className="why-we-different__text about-us-carousel__position">Project Manager</p>
-              <img className="about-us-carousel__person-photo" src="/public/person-1.jpg" alt="person photo" />
+              <img className="about-us-carousel__person-photo" src="./person-1.jpg" alt="person photo" />
             </div>
             </div>
           </div>
@@ -173,13 +173,13 @@ export const AboutUsPage = () => {
         <button
           onClick={handleLeftClick}
           className="about-us-carousel__button--left">
-          <img className="about-us-carousel__arrow-icon" src="/public/arrow-left.png" alt="arrow-left.png" />
+          <img className="about-us-carousel__arrow-icon" src="./arrow-left.png" alt="arrow-left.png" />
         </button>
 
         <button
           onClick={handleRightClick}
           className="about-us-carousel__button--right">
-          <img className="about-us-carousel__arrow-icon" src="/public/arrow-rigth.png" alt="arrow-rigth.png" />
+          <img className="about-us-carousel__arrow-icon" src="./arrow-rigth.png" alt="arrow-rigth.png" />
         </button>
       </div>
       <Footer />

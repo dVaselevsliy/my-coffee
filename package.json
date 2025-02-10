@@ -5,7 +5,7 @@
   "type": "module",
   "homepage": "https://dVaselevsliy.github.io/my-coffee",
   "scripts": {
-    "predeploy": "npm run build",
+    "predeploy": "rm -rf dist && npm run build",
     "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "vite build",

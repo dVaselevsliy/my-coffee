@@ -214,7 +214,7 @@ export const ProductsPage = () => {
                         sort === 2 && coffee.priceSort && 'sort__arrow--up'
                         } ${
                         sort === 1 && coffee.priceSort && 'sort__arrow--down'
-                        }`} src="/public/arrow.png" alt="" />
+                        }`} src="./arrow.png" alt="" />
                     </div>
                     <div className="sort__section"
                       onClick={() => {
@@ -238,7 +238,7 @@ export const ProductsPage = () => {
                         sort === 2 && coffee.alphabeticallySort && 'sort__arrow--up'
                         } ${
                         sort === 1 && coffee.alphabeticallySort && 'sort__arrow--down'
-                        }`} src="/public/arrow.png" alt="" />
+                        }`} src="./arrow.png" alt="" />
                     </div>
                     <div className="sort__section"
                       onClick={() => {
@@ -258,7 +258,7 @@ export const ProductsPage = () => {
                         sort === 2 && coffee.roastLevelSort && 'sort__arrow--up'
                         } ${
                         sort === 1 && coffee.roastLevelSort && 'sort__arrow--down'
-                        }`} src="/public/arrow.png" alt="" />
+                        }`} src="./arrow.png" alt="" />
                     </div>
                   </div>
                 </div>

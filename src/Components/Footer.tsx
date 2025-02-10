@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { NavLink } from "react-router-dom"
 
+
 export const Footer = () => {
   const [queryEmail, setQueryEmail] = useState('')
   const [subscribe, setSubscribe] = useState(false)
@@ -49,8 +50,8 @@ export const Footer = () => {
               />
               <button className="footer__bottom">Suscribe</button>
             </form>
-            <img className="footer__coffee-cup-left" src="/public/coffee-cup-left.png" alt="coffee-cup png" />
-            <img className="footer__coffee-cup-rigth" src="/public/coffee-cup-rigth.png" alt="coffee-cup png" />
+            <img className="footer__coffee-cup-left" src="./coffee-cup-left.png" alt="coffee-cup png" />
+            <img className="footer__coffee-cup-rigth" src="./coffee-cup-rigth.png" alt="coffee-cup png" />
           </div>
         </div>
       </div>
@@ -63,19 +64,19 @@ export const Footer = () => {
               <p className="footer-down__paragraf">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
               <div className="footer-down__icons">
                 <a className="footer-down__icon" href="https://www.facebook.com/facebook/?locale=uk_UA" target="_blank">
-                  <img src="/public/facebook.png" alt="facebook icon" />
+                  <img src="./facebook.png" alt="facebook icon" />
                 </a>
 
                 <a className="footer-down__icon" href="https://www.instagram.com" target="_blank">
-                  <img src="/public/instagram.png" alt="instagram icon" />
+                  <img src="./instagram.png" alt="instagram icon" />
                 </a>
 
                 <a className="footer-down__icon" href="https://www.youtube.com" target="_blank">
-                  <img src="/public/youtube.png" alt="youtube icon" />
+                  <img src="./youtube.png" alt="youtube icon" />
                 </a>
                 
                 <a className="footer-down__icon" href="https://x.com/?lang=uk" target="_blank">
-                  <img src="/public/twitter.png" alt="twitter icon" />
+                  <img src="./twitter.png" alt="twitter icon" />
                 </a>  
             </div>
             </div>
