@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { NavLink } from "react-router-dom"
-
+import leftCup from '../images/coffee-cup-left.png'
 
 export const Footer = () => {
   const [queryEmail, setQueryEmail] = useState('')
@@ -50,7 +50,7 @@ export const Footer = () => {
               />
               <button className="footer__bottom">Suscribe</button>
             </form>
-            <img className="footer__coffee-cup-left" src="./coffee-cup-left.png" alt="coffee-cup png" />
+            <img className="footer__coffee-cup-left" src={leftCup} alt="coffee-cup png" />
             <img className="footer__coffee-cup-rigth" src="./coffee-cup-rigth.png" alt="coffee-cup png" />
           </div>
         </div>
