@@ -1,6 +1,5 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import 'bulma';
 import { App } from './App'
 import {Route, HashRouter as Router, Routes} from 'react-router-dom'
 import { NotFoundPage } from './pages/NotFoundPage'
@@ -11,12 +10,14 @@ import { Aside } from './pages/Aside'
 import { AboutUsPage } from './pages/AboutUsPage'
 import { Provider } from 'react-redux';
 import { SelectedCoffee } from './pages/SelectedCoffee';
+import { ScroolMyTop } from './Components/scroolMyTop'
 
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Provider store={store}>
       <Router>
+        <ScroolMyTop />
         <Routes>
             <Route path='/' element={<App />}>
               <Route index element={<HomePage />} /> 

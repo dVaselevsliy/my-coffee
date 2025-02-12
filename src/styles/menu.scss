@@ -21,6 +21,7 @@
     font-size: 54px;
     color: #442808;
     font-weight: bold;
+    margin-top: 92px;
   }
 
   &__under-title {
@@ -312,7 +313,8 @@
     color: #000;
     border-radius: 5px;
     margin-inline: 10px;
-    transition: transform 0.3 ease;
+    transition: transform 0.3s ease;
+    cursor: pointer;
 
   &:hover {
     transform: scale(1.1);
@@ -323,7 +325,7 @@
 
 .button-active {
   background-color: rgb(219, 109, 109);
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .sort {

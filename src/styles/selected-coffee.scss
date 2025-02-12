@@ -28,6 +28,7 @@
 
   &__order-button {
     margin: 20px;
+    margin-top: 110px;
   }
 
   &__order-sent-div {
@@ -62,6 +63,7 @@
     color: #433d3d;
     font-weight: bold;
     font-size: 25px;
+    margin-top: 221px;
 
     @media (max-width: 550px) {
       font-size: 18px;
@@ -92,6 +94,7 @@
 
   &__image {
     max-width: 900px;
+    margin-top: 120px;
 
     @media (max-width: 1250px) {
       max-width: 630px;
@@ -161,6 +164,5 @@
 
 .back-button-order {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 20px;
 }

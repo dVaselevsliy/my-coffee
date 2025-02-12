@@ -6,14 +6,6 @@ export const Footer = () => {
   const [queryEmail, setQueryEmail] = useState('')
   const [subscribe, setSubscribe] = useState(false)
   
-  const scrollToHeader = () => {
-    const contactsElement = document.getElementById('header')
-
-    if (contactsElement) {
-      contactsElement.scrollIntoView({behavior: 'smooth'})
-    }
-  }
-
   const reset = () => {
     setQueryEmail('')
   }
@@ -89,7 +81,7 @@ export const Footer = () => {
               <NavLink className="footer-down__second-column--section" to="/menu">Menu</NavLink>
               <NavLink className="footer-down__second-column--section" to="/about-us">About us</NavLink>
               <button
-                onClick={scrollToHeader}
+                onClick={() => window.scrollTo(0, 0)}
                 className="footer-down__second-column--section">Top
               </button>
             </div>

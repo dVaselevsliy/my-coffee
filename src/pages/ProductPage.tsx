@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Header } from "../Components/Header";
 import { Loader } from "../Components/Loader";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
@@ -9,6 +9,7 @@ import { ModalWindow } from "../Components/ModalWindow";
 import { NavLink, useSearchParams } from "react-router-dom";
 import { actions as actionsModal } from "../reducers/modalContent";
 import { Footer } from "../Components/Footer";
+import { useDebounce } from "use-debounce";
 
 type SortFieldType = {
   All: string;
@@ -65,6 +66,8 @@ export const ProductsPage = () => {
   const [query, setQuery] = useState('')
   const [sortField, setSortField] = useState(SORT_FIELD.All)
   const [activeFilter, setActiveFilter] = useState(SORT_FIELD.All)
+
+  const [debouncedQuery] = useDebounce(query, 300)
   
   const [sort, setSort] = useState(0)
 
@@ -102,8 +105,15 @@ export const ProductsPage = () => {
     dispatch(init())
   }, [dispatch]);
   
-  const coffeeArrayByQuery = getPreperedName(coffee.coffee, query, sortField)
-  const finalyArray = getSortCoffee(coffeeArrayByQuery, sort, coffee.priceSort, coffee.alphabeticallySort, coffee.roastLevelSort)
+  const coffeeArrayByQuery = useMemo(() => {
+    return getPreperedName(coffee.coffee, debouncedQuery, sortField)
+  }, [coffee.coffee, debouncedQuery, sortField])
+  
+  const finalyArray = useMemo(() => {
+    return getSortCoffee(
+      coffeeArrayByQuery, sort, coffee.priceSort, coffee.alphabeticallySort, coffee.roastLevelSort
+    )
+  }, [coffeeArrayByQuery, sort, coffee.priceSort, coffee.alphabeticallySort, coffee.roastLevelSort])
 
 
   useEffect(() => {
@@ -116,18 +126,10 @@ export const ProductsPage = () => {
   }, [sort, dispatch]);
 
   useEffect(() => {
-    let sortParams = {}
-
-    if (sort === 1) {
-      if (coffee.roastLevelSort) sortParams = { roastLevelSort: 'low-high' }
-      if (coffee.alphabeticallySort) sortParams = { alphabeticallySort: 'yes' }
-      if (coffee.priceSort) sortParams = { sortPrice: 'low-high'}
-    } else if (sort === 2) {
-      if (coffee.roastLevelSort) sortParams = { roastLevelSort: 'high-low' }
-      if (coffee.alphabeticallySort) sortParams = { alphabeticallySort: 'reverse' }
-      if (coffee.priceSort) sortParams = { sortPrice: 'high-low'}
-    } else {
-      sortParams = { roastLevelSort: '', alphabeticallySort: '', sortPrice: ''}
+    const sortParams = {
+      roastLevelSort: coffee.roastLevelSort ? (sort === 1 ? 'low-high' : 'high-low') : '',
+      alphabeticallySort: coffee.alphabeticallySort ? (sort === 1 ? 'yes' : 'reverse') : '',
+      priceSort: coffee.priceSort ? (sort === 1 ? 'low-high' : 'high-low') : ''
     }
 
     updateSearchParams(sortParams)
@@ -148,8 +150,6 @@ export const ProductsPage = () => {
       }
       {coffee.error && <p className="menu__error">{coffee.error}</p>}
 
-          
-      
       <div className="menu--header">
         <div className="menu--header--text">
           <h2 className="menu__title">Enjoy a new blend of coffee style</h2>

@@ -4,9 +4,9 @@ import { ModalWindow } from "../Components/ModalWindow"
 import { useAppSelector } from "../redux/hooks"
 import { Footer } from "../Components/Footer"
 
-
 export const HomePage = () => {
   const { modal } = useAppSelector(state => state.modal)
+
   return (
     <div>
       <div className="home-page">
@@ -25,9 +25,11 @@ export const HomePage = () => {
             for our customers.
           </p>
   
-          <div className="header__button additional-indents header__button--fix">
-              <NavLink className="header__sign-in--text-black size header__sign-in--text-black--fix" to="/menu">Order Now</NavLink>
-            </div>
+            <NavLink className="
+              header__sign-in--text-black size header__sign-in--text-black--fix
+              header__button additional-indents header__button--fix
+              "
+              to="/menu">Order Now</NavLink>
         </div>
       </div>
         <Footer />

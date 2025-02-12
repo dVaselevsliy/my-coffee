@@ -12,17 +12,16 @@ $text-white-color: #fff;
   color: $text-white-color;
 
   &__main {
-    display: flex;
-    margin: 61px 0 12px 136px;
-    flex-direction: column;
-    align-items: baseline;
-    justify-content: flex-start;
-    height: 64vh;
+      flex-direction: column;
+      align-items: baseline;
+      padding-left: 55px;
+      display: flex;
+      justify-content: center;
+      height: 100vh;
 
     @media (max-width: 900px) {
-      justify-content: center;
       align-items: center;
-      margin: 60px 10px;
+      margin-right: 40px;
     }
   }
   
@@ -52,7 +51,7 @@ $text-white-color: #fff;
     width: 530px;
     border-radius: 20px;
     padding: 20px;
-    background-color: #9e9a8e;
+    background-color: #6f6e689c;
 
      @media (max-width: 600px) {
       width: auto;
@@ -69,6 +68,10 @@ $text-white-color: #fff;
 
 .header {
   width: 100%;
+  position: fixed;
+  z-index: 2;
+  color: #443b3b;
+  background-color: #3634309c;
   
   &__order-text {
     display: flex;
@@ -99,10 +102,14 @@ $text-white-color: #fff;
 
   &__top {
     display: flex;
-    flex-wrap: wrap;
     text-align: center;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding-inline: 70px;
+
+    @media (max-width: 500px) {
+      padding-inline: 20px;
+    }
   }
 
   &__bean-scene {
@@ -128,13 +135,18 @@ $text-white-color: #fff;
 
   &__link {
     color: $text-white-color;
+    border: none;
+    background: transparent;
+    font-family: 'Playfair Display';
     text-decoration: none;
     font-size: 17px;
     padding: 20px 30px;
     transition: all 0.3s ease-in-out;
+    cursor: pointer;
 
     &:hover {
       transform: scale(1.2);
+      color: $text-white-color;
     }
   }
 
@@ -152,6 +164,7 @@ $text-white-color: #fff;
     &--fix {
       width: auto;
       height: auto;
+      padding: 0;
     }
 
     @keyframes flash {
@@ -180,9 +193,6 @@ $text-white-color: #fff;
   }
 
   &__sign-in {
-    display: flex;
-    align-items: center;
-    gap: 10px;
     padding: 20px;
 
 
@@ -206,7 +216,7 @@ $text-white-color: #fff;
       padding: 14px 25px 25px 25px;
 
       &--fix {
-        padding: 22px 25px 25px 25px;
+        padding: 25px;
       }
     }
   }

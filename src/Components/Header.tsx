@@ -21,9 +21,13 @@ export const Header = () => {
         <span className="header__bean-scene">Bean Scene</span>
 
         <div className="header__links">
-            <NavLink className="header__link" to="/">Home</NavLink>
-            <NavLink className="header__link" to="/menu">Menu</NavLink>
-            <NavLink className="header__link" to="/about-us">About Us</NavLink>
+          <NavLink
+            className="header__link"
+            to="/"
+            onClick={() => window.scrollTo(0, 0)}
+          >Home</NavLink>
+            <NavLink onClick={() => window.scrollTo(0, 0)} className="header__link" to="/menu">Menu</NavLink>
+            <NavLink onClick={() => window.scrollTo(0, 0)} className="header__link" to="/about-us">About Us</NavLink>
           <button
             onClick={() => {
               scrollToContacts()

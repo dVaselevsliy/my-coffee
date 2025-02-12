@@ -1,4 +1,3 @@
-
 import { SORT_FIELD } from "../pages/ProductPage";
 import { Coffee } from "../types/Coffee";
 
