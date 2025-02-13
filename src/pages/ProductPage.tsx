@@ -10,57 +10,7 @@ import { NavLink, useSearchParams } from "react-router-dom";
 import { actions as actionsModal } from "../reducers/modalContent";
 import { Footer } from "../Components/Footer";
 import { useDebounce } from "use-debounce";
-
-type SortFieldType = {
-  All: string;
-  CentralAmerica: string;
-  Africa: string;
-  SouthAmerica: string;
-  AsiaPacific: string;
-  MiddleEast: string;
-}
-
-export const SORT_FIELD: SortFieldType = {
-  All: 'all',
-  CentralAmerica: 'Central America',
-  Africa: 'Africa',
-  SouthAmerica: 'South America',
-  AsiaPacific: 'Asia Pacific',
-  MiddleEast: 'Middle East'
-}
-
-const sortArray = [
-  {
-    name: 'All',
-    searchParamsName: 'All',
-    id: SORT_FIELD.All
-  },
-  {
-    name: 'Central America',
-    searchParamsName: 'CentralAmerica',
-    id: SORT_FIELD.CentralAmerica
-  },
-  {
-    name: 'Africa',
-    searchParamsName: 'Africa',
-    id: SORT_FIELD.Africa
-  },
-  {
-    name: 'South America',
-    searchParamsName: 'SouthAmerica',
-    id: SORT_FIELD.SouthAmerica
-  },
-  {
-    name: 'Asia Pacific',
-    searchParamsName: 'AsiaPacific',
-    id: SORT_FIELD.AsiaPacific
-  },
-  {
-    name: 'Middle East',
-    searchParamsName: 'MiddleEast',
-    id: SORT_FIELD.MiddleEast
-  },
-]
+import { SORT_FIELD, sortArray } from "../helper/sortField";
 
 export const ProductsPage = () => {
   const [query, setQuery] = useState('')
@@ -98,9 +48,6 @@ export const ProductsPage = () => {
     }, [setSearchParams]
   )
     
-
-
-  
   useEffect(() => {
     dispatch(init())
   }, [dispatch]);
@@ -267,32 +214,34 @@ export const ProductsPage = () => {
           </div>
         </div>
 
-        {coffee.loading && (
+        {coffee.loading ? (
             <Loader />
-          )}
+        ) : (
+          <main className="menu">
+          {finalyArray.map((coffee) => (
+            <div className="product" key={coffee.id}>
+              <div className="product__image-container">
+                <img className="product__image" src={coffee.image_url} alt={`${coffee.name || 'product'}.logo`} />
+              </div>
+              <h6 className="product__name">{coffee.name}</h6>
+              <p className="product__description">{coffee.description}</p>
+              <span className="product__price">{`$${coffee.price}`}</span>
 
-        <main className="menu">
-      {finalyArray.map((coffee) => (
-        <div className="product" key={coffee.id}>
-          <div className="product__image-container">
-            <img className="product__image" src={coffee.image_url} alt={`${coffee.name || 'product'}.logo`} />
-          </div>
-          <h6 className="product__name">{coffee.name}</h6>
-          <p className="product__description">{coffee.description}</p>
-          <span className="product__price">{`$${coffee.price}`}</span>
+              <div
+                onClick={() => {
+                  dispatch(actionsCoffee.setSelectedProductId(coffee.id))
+                  dispatch(actionsModal.setBuySuccessfully(false))
+                }}
+                className="header__button additional-indents absolute">
+                <NavLink className="header__order-text" to={`/selected-coffee/${coffee.id}`}>Order Now</NavLink>
+              </div>
+            </div>
+        ))}
+        </main>
+        )}
 
-          <div
-            onClick={() => {
-              dispatch(actionsCoffee.setSelectedProductId(coffee.id))
-              dispatch(actionsModal.setBuySuccessfully(false))
-            }}
-            className="header__button additional-indents absolute">
-            <NavLink className="header__order-text" to={`/selected-coffee/id=${coffee.id}`}>Order Now</NavLink>
-          </div>
-        </div>
-    ))}
-    </main>
       </div>
+
       {!coffee.loading && (
         <Footer />
       )}

@@ -1,6 +1,8 @@
+import { Coffee } from "../types/Coffee"
+
 export const getSortCoffee = (
-  productArray,
-  sort,
+  productArray: Coffee[],
+  sort: number,
   priceSort = false,
   alphabeticallySort = false,
   roastLevelSort = false,

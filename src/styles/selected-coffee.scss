@@ -2,11 +2,34 @@
   height: 92vh;
 }
 
+.order-absolute {
+  margin: 20px;
+  margin-top: 110px;
+  width: 100px;
+}
+
+.order-loading {
+  margin-top: 200px;
+}
+
 .selected-coffee {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   box-sizing: border-box;
   overflow: hidden;
+
+  &__false {
+    display: flex;
+    flex-direction: column;
+
+    &--title {
+      margin: auto;
+      font-size: 87px;
+      color: #ff1515;
+      font-weight: bold;
+      margin-top: 67px;  
+    }
+  }
 
   @media (max-width: 1250px) {
     grid-template-columns: repeat(1, 1fr);
@@ -34,12 +57,9 @@
   &__order-sent-div {
     display: flex;
     position: relative;
-    flex-direction: column;
-    align-items: center;
     margin: 20px;
-    text-align: center;
-    margin: 20px;
-    margin-bottom: 311px;
+
+
   }
   
   &__order-sent {
@@ -47,8 +67,8 @@
     font-size: 87px;
     color: #41702a;
     font-weight: bold;
-    margin-top: 67px;
-    margin-bottom: 440px;
+    margin-top: 140px;
+    margin-bottom: 565px;
 
     @media (max-width: 650px) {
       font-size: 48px;
@@ -165,4 +185,5 @@
 .back-button-order {
   position: absolute;
   top: 20px;
+  z-index: 1;
 }

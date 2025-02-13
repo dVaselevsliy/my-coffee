@@ -1,5 +1,5 @@
-import { SORT_FIELD } from "../pages/ProductPage";
 import { Coffee } from "../types/Coffee";
+import { SORT_FIELD } from "./sortField";
 
 export const getPreperedName = (
   productArray: Coffee[],

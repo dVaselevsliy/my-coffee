@@ -41,8 +41,8 @@ export const Header = () => {
               onClick={() => {
                 dispatch(actionsModal.setModalActive(!modal.modalActive))
               }}
-              className="header__button">
-              <span className="header__sign-in--text-black">SignUp</span>
+              className="header__button header__sign-in--text-black">
+              SignUp
             </div>
           </div>
         )}
