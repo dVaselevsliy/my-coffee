@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit"
 import { getCoffee } from "../api"
 import { Coffee } from "../types/Coffee"
+import { SORT_FIELD } from "../helper/sortField"
 
 export const init = createAsyncThunk('coffee/fetch', 
   () => {
@@ -16,7 +17,9 @@ interface CoffeeType {
   alphabeticallySort: boolean,
   roastLevelSort: boolean,
   selectedProductId: number | null,
-  selectedProduct: Coffee | null
+  selectedProduct: Coffee | null,
+  sort: number,
+  sortField: string
 }
 
 const initialState: CoffeeType = {
@@ -27,7 +30,9 @@ const initialState: CoffeeType = {
   alphabeticallySort: false,
   roastLevelSort: false,
   selectedProductId: null,
-  selectedProduct: null
+  selectedProduct: null,
+  sort: 0,
+  sortField: SORT_FIELD.All
 }
 
 export const coffeeSlice = createSlice({
@@ -52,6 +57,14 @@ export const coffeeSlice = createSlice({
 
     setSelectedProduct: (state, action) => {
       state.selectedProduct = action.payload
+    },
+
+    setSort: (state, action) => {
+      state.sort = action.payload
+    },
+
+    setSortField: (state, action) => {
+      state.sortField = action.payload 
     }
   },
   extraReducers: (builder) => {

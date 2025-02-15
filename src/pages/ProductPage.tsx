@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Header } from "../Components/Header";
 import { Loader } from "../Components/Loader";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
@@ -13,21 +13,20 @@ import { useDebounce } from "use-debounce";
 import { SORT_FIELD, sortArray } from "../helper/sortField";
 
 export const ProductsPage = () => {
-  const [query, setQuery] = useState('')
-  const [sortField, setSortField] = useState(SORT_FIELD.All)
-  const [activeFilter, setActiveFilter] = useState(SORT_FIELD.All)
-
-  const [debouncedQuery] = useDebounce(query, 300)
+  const [, setActiveFilter] = useState(SORT_FIELD.All)
   
-  const [sort, setSort] = useState(0)
-
   const dispatch = useAppDispatch()
   const { coffee } = useAppSelector(state => state.coffee)
   const { modal } = useAppSelector(state => state.modal)
+  
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get('query') || ''
+  const country = searchParams.get('country') || ''
+  const sortAll = searchParams.get('sort') || ''
+  
+  const [debouncedQuery] = useDebounce(query, 300)
 
-  const [, setSearchParams] = useSearchParams();
-
-  const updateSearchParams = useCallback(
+/*   const updateSearchParams = useCallback(
     (newParams: Record<string, string | string[]>) => {
       setSearchParams((prevParams) => {
         const params = new URLSearchParams(prevParams)
@@ -46,45 +45,104 @@ export const ProductsPage = () => {
         return params
       })
     }, [setSearchParams]
-  )
+  ) */
+  
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams)
+
+    params.set('country', coffee.sortField.toString())
+
+    setSearchParams(params)
+  }, [searchParams, setSearchParams, coffee.sortField])
+  
+  useEffect(() => {
+    if (sortAll) {
+      if (sortAll.includes('roast-')) {
+        dispatch(actionsCoffee.setSort(sortAll.includes('low-high')
+          ? 1 : sortAll.includes('high-low')
+          ? 2 : ''
+        ))
+        dispatch(actionsCoffee.setRoastLevelSort(true))
+      } else if (sortAll.includes('alphabetically-')) {
+        dispatch(actionsCoffee.setSort(sortAll.includes('asc')
+          ? 1 : sortAll.includes('desc')
+          ? 2 : ''
+        ))
+        dispatch(actionsCoffee.setAlphabeticallySort(true))
+      } else if (sortAll.includes('price-')) {
+        dispatch(actionsCoffee.setSort(sortAll.includes('asc')
+          ? 1 : sortAll.includes('desc')
+          ? 2 : ''))
+        dispatch(actionsCoffee.setPriceSort(true))
+      }
+    }
+  }, [searchParams, dispatch, sortAll])
+
+  useEffect(() => {
+    if (country) {
+      dispatch(actionsCoffee.setSortField(country))
+    }
+  }, [searchParams, dispatch, country])
     
   useEffect(() => {
     dispatch(init())
   }, [dispatch]);
   
   const coffeeArrayByQuery = useMemo(() => {
-    return getPreperedName(coffee.coffee, debouncedQuery, sortField)
-  }, [coffee.coffee, debouncedQuery, sortField])
+    return getPreperedName(coffee.coffee, debouncedQuery, coffee.sortField)
+  }, [coffee.coffee, debouncedQuery, coffee.sortField])
   
   const finalyArray = useMemo(() => {
     return getSortCoffee(
-      coffeeArrayByQuery, sort, coffee.priceSort, coffee.alphabeticallySort, coffee.roastLevelSort
+      coffeeArrayByQuery, coffee.sort, coffee.priceSort, coffee.alphabeticallySort, coffee.roastLevelSort
     )
-  }, [coffeeArrayByQuery, sort, coffee.priceSort, coffee.alphabeticallySort, coffee.roastLevelSort])
+  }, [coffeeArrayByQuery, coffee.sort, coffee.priceSort, coffee.alphabeticallySort, coffee.roastLevelSort])
 
 
   useEffect(() => {
-    if (sort >= 3) {
-      setSort(0);
+    if (coffee.sort >= 3) {
+      dispatch(actionsCoffee.setSort(0))
       dispatch(actionsCoffee.setPriceSort(false));
       dispatch(actionsCoffee.setAlphabeticallySort(false));
       dispatch(actionsCoffee.setRoastLevelSort(false));
+
+      const params = new URLSearchParams(searchParams)
+      params.set('sort', '')
+      setSearchParams(params)
     }
-  }, [sort, dispatch]);
+  }, [coffee.sort, dispatch, searchParams, setSearchParams]);
 
   useEffect(() => {
-    const sortParams = {
-      roastLevelSort: coffee.roastLevelSort ? (sort === 1 ? 'low-high' : 'high-low') : '',
-      alphabeticallySort: coffee.alphabeticallySort ? (sort === 1 ? 'yes' : 'reverse') : '',
-      priceSort: coffee.priceSort ? (sort === 1 ? 'low-high' : 'high-low') : ''
+    const params = new URLSearchParams(searchParams)
+
+    if (coffee.roastLevelSort) {
+      params.set('sort', coffee.sort === 1
+        ? 'roast-low-high' : coffee.sort === 2
+          ? 'roast-high-low' : '')
+    } else if (coffee.alphabeticallySort) {
+      params.set('sort', coffee.sort === 1
+        ? 'alphabetically-asc' : coffee.sort === 2
+        ? 'alphabetically-desc' : '')
+    } else if (coffee.priceSort) {
+      params.set('sort', coffee.sort === 1
+        ? 'price-asc' : coffee.sort === 2
+        ? 'price-desc' : '')
+    } else {
+      params.delete('sort')
     }
 
-    updateSearchParams(sortParams)
-  }, [sort, coffee.roastLevelSort, coffee.alphabeticallySort, coffee.priceSort, updateSearchParams])
+    setSearchParams(params)
+  }, [coffee.sort, coffee.roastLevelSort, coffee.alphabeticallySort, coffee.priceSort, searchParams, setSearchParams])
 
   const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    updateSearchParams({query: `${event.target.value}`})
-    setQuery(event.target.value)
+    const params = new URLSearchParams(searchParams)
+
+    if (event.target.value) {
+      params.set('query', event.target.value)
+    } else {
+      params.delete('query')
+    }
+    setSearchParams(params)
   }
 
   return (
@@ -125,11 +183,10 @@ export const ProductsPage = () => {
                         <button
                             key={sort.id}                        
                             onClick={() => {
-                            updateSearchParams({country: `${sort.searchParamsName}`})  
                             setActiveFilter(sort.id)
-                            setSortField(sort.id)
+                            dispatch(actionsCoffee.setSortField(sort.id))
                           }}
-                          className={`filter__button ${activeFilter === sort.id && 'button-active'}`}>
+                          className={`filter__button ${coffee.sortField === sort.id && 'button-active'}`}>
                           {sort.name}
                         </button>
                     ))}
@@ -143,13 +200,13 @@ export const ProductsPage = () => {
                     <div className="sort__section"
                       onClick={() => {
                         if (coffee.alphabeticallySort || coffee.roastLevelSort) {
-                            setSort(0)
+                            dispatch(actionsCoffee.setSort(0))
                             dispatch(actionsCoffee.setAlphabeticallySort(false));
                             dispatch(actionsCoffee.setRoastLevelSort(false));
                             dispatch(actionsCoffee.setPriceSort(false))
                             return
                         }
-                        setSort(sort + 1)
+                        dispatch(actionsCoffee.setSort(coffee.sort + 1))
                         dispatch(actionsCoffee.setPriceSort(true))
                       }}
                     >
@@ -158,22 +215,21 @@ export const ProductsPage = () => {
                         Price
                       </strong>
                       <img className={`sort__arrow ${
-                        sort === 2 && coffee.priceSort && 'sort__arrow--up'
+                        coffee.sort === 2 && coffee.priceSort && 'sort__arrow--up'
                         } ${
-                        sort === 1 && coffee.priceSort && 'sort__arrow--down'
+                        coffee.sort === 1 && coffee.priceSort && 'sort__arrow--down'
                         }`} src="./arrow.png" alt="" />
                     </div>
                     <div className="sort__section"
                       onClick={() => {
                         if (coffee.priceSort || coffee.roastLevelSort) {
-                          return (
-                            setSort(0),
-                            dispatch(actionsCoffee.setPriceSort(false)),
+                            dispatch(actionsCoffee.setSort(0))
+                            dispatch(actionsCoffee.setPriceSort(false))
                             dispatch(actionsCoffee.setRoastLevelSort(false))
-                          )
+                            return
                         }
                         dispatch(actionsCoffee.setAlphabeticallySort(true));
-                        setSort(sort + 1)
+                        dispatch(actionsCoffee.setSort(coffee.sort + 1))
                       }}
                     >
                       <strong
@@ -182,29 +238,28 @@ export const ProductsPage = () => {
                         Alphabetically
                       </strong>
                       <img className={`sort__arrow ${
-                        sort === 2 && coffee.alphabeticallySort && 'sort__arrow--up'
+                        coffee.sort === 2 && coffee.alphabeticallySort && 'sort__arrow--up'
                         } ${
-                        sort === 1 && coffee.alphabeticallySort && 'sort__arrow--down'
+                          coffee.sort === 1 && coffee.alphabeticallySort && 'sort__arrow--down'
                         }`} src="./arrow.png" alt="" />
                     </div>
                     <div className="sort__section"
                       onClick={() => {
                         if (coffee.priceSort || coffee.alphabeticallySort) {
-                          return (
-                            setSort(0),
-                            dispatch(actionsCoffee.setPriceSort(false)),
-                            dispatch(actionsCoffee.setAlphabeticallySort(false))
-                          )
+                          dispatch(actionsCoffee.setSort(0))
+                          dispatch(actionsCoffee.setPriceSort(false))
+                          dispatch(actionsCoffee.setAlphabeticallySort(false))
+                          return
                         }
                         dispatch(actionsCoffee.setRoastLevelSort(true))
-                        setSort(sort + 1)
+                        dispatch(actionsCoffee.setSort(coffee.sort + 1))
                       }}
                     >
                       <strong className="sort__option">Roast Level</strong>
                       <img className={`sort__arrow ${
-                        sort === 2 && coffee.roastLevelSort && 'sort__arrow--up'
+                        coffee.sort === 2 && coffee.roastLevelSort && 'sort__arrow--up'
                         } ${
-                        sort === 1 && coffee.roastLevelSort && 'sort__arrow--down'
+                        coffee.sort === 1 && coffee.roastLevelSort && 'sort__arrow--down'
                         }`} src="./arrow.png" alt="" />
                     </div>
                   </div>

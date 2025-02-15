@@ -1,19 +1,20 @@
-import { useCallback, useEffect, useRef, useState } from "react"
-import { useAppDispatch } from "../redux/hooks"
+import React, { useCallback, useEffect, useRef, useState } from "react"
+import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import { actions as actionsModal } from "../reducers/modalContent"
 
-export const ModalWindow = () => {
-  const [email, setEmail] = useState('')
+
+export const ModalWindow: React.FC = () => {
   const [password, setPassword] = useState('')
   const [errorInput, setErrorInput] = useState('')
 
   const dispatch = useAppDispatch()
+  const { modal } = useAppSelector(state => state.modal)
 
   const handleSumbmitInput = (event: React.FormEvent) => {
     event.preventDefault()
     setErrorInput('')
 
-    if (email.length === 0) {
+    if (modal.email.length === 0) {
       setErrorInput('Email should not be empty')
       return
     }
@@ -24,14 +25,15 @@ export const ModalWindow = () => {
     }
 
     dispatch(actionsModal.setSignIn(true))
-    if (email.length !== 0 || password.length !== 0) {
+    console.log(modal.email);
+    
+    if (modal.email.length !== 0 || password.length !== 0) {
       return reset()
     }
   }
 
   const reset = () => {
     setErrorInput('')
-    setEmail('')
     setPassword('')
     dispatch(actionsModal.setModalActive(false))
   }
@@ -73,9 +75,9 @@ export const ModalWindow = () => {
             <input
               required
               ref={inputRef}
-              value={email}
+              value={modal.email}
               onChange={(event) => {
-                setEmail(event.target.value)
+                dispatch(actionsModal.setEmail(event.target.value))
               }}
               className={`input ${
                 errorInput === 'Email should not be empty' && 'is-danger'

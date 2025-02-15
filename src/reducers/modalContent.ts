@@ -4,7 +4,8 @@ const initialState = {
   modalActive: false,
   signIn: false,
   modalBuyActive: false,
-  buySuccessfully: false
+  buySuccessfully: false,
+  email: ''
 }
 
 export const modalSlice = createSlice({
@@ -22,7 +23,10 @@ export const modalSlice = createSlice({
     },
     setBuySuccessfully: (state, action: PayloadAction<boolean>) => {
       state.buySuccessfully = action.payload
-    }
+    },
+    setEmail: (state, action: PayloadAction<string>) => {
+      state.email = action.payload
+    },
   }
 })
 

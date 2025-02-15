@@ -35,16 +35,20 @@ export const Header = () => {
             className="header__link">Contact Us</button>
         </div>
 
-        {!modal.signIn && (
+        {modal.signIn ? (
           <div className="header__sign-in">
-            <div
-              onClick={() => {
-                dispatch(actionsModal.setModalActive(!modal.modalActive))
-              }}
-              className="header__button header__sign-in--text-black">
-              SignUp
-            </div>
+            <p className='header__sign-in--email'>{modal.email}</p>
           </div>
+        ) : (
+          <div className="header__sign-in">
+          <div
+            onClick={() => {
+              dispatch(actionsModal.setModalActive(!modal.modalActive))
+            }}
+            className="header__button header__sign-in--text-black">
+            SignUp
+          </div>
+        </div>
         )}
         
         <NavLink to="/aside" className="header__icon header__icon--burger">

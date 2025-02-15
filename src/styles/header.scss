@@ -194,6 +194,13 @@ $text-white-color: #fff;
 
   &__sign-in {
 
+    &--email {
+      color: burlywood;
+      font-family: auto;
+      text-decoration: 1px solid underline;
+      font-size: 17px;
+    }
+
     &--text-white {
       color: $text-white-color;
       margin-right: 20px;
@@ -233,7 +240,7 @@ $text-white-color: #fff;
   display: flex;
   flex-direction: column;
   z-index: 1;
-  top: 0;
+  top: 100px;
   right: 0;
   width: 400px;
   transform: translate(-50px);

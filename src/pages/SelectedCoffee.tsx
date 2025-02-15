@@ -36,6 +36,7 @@ export const SelectedCoffee = () => {
   }, [coffee.coffee, coffee.selectedProductId]) */
 
   useEffect(() => {
+    if (!productId) return
     setLoading(true)
     getSomeProduct(+productId)
       .then(data => (
