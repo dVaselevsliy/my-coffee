@@ -92,7 +92,7 @@ export const Footer = () => {
               <span className="footer-down__third-column--section">Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016</span>
               <a className="footer-down__third-column--section" href="tel:+1 202-918-2132">+1 202-918-2132</a>
               <a className="footer-down__third-column--section" href="mailto:beanscene@mail.com">beanscene@mail.com</a>
-              <a className="footer-down__third-column--section" href="https://www.beanscene.com">www.beanscene.com</a>
+              <a className="footer-down__third-column--section" href="https://www.beanscene.com" target="_blank">www.beanscene.com</a>
           </div>
         </div>
       </div>

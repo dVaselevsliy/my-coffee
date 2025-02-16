@@ -24,28 +24,21 @@ export const SelectedCoffee = () => {
     navigate(-1)
   }
 
-/*   useEffect(() => {
-    setLoading(true)
-
-    const selectedCoffees = coffee.coffee.find(arr => (
-      coffee.selectedProductId === arr.id
-    ))
-
-    setSelectedCoffee(selectedCoffees || null)
-    setLoading(false)
-  }, [coffee.coffee, coffee.selectedProductId]) */
-
   useEffect(() => {
     if (!productId) return
+
     setLoading(true)
+
     getSomeProduct(+productId)
-      .then(data => (
-        setSelectedCoffee(data[0])
-      ))
-      
+      .then(data => {
+        if (data.length !== 0) {
+          setSelectedCoffee(data[0])
+        } else {
+          setSelectedCoffee(null)
+        }
+      })
       .finally(() => setLoading(false))
     }, [productId])
-    console.log(selectedCoffee);
 
   if (loading) {
     return (

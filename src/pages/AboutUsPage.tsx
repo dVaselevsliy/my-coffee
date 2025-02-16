@@ -63,7 +63,7 @@ export const AboutUsPage = () => {
           <h2 className="about-us__h2">Discover the best coffee</h2>
           <p className='about-us__paragraf'>Bean Scene is a coffee shop that provides you with quality coffee that helps boost your productivity and helps build your mood. Having a cup of coffee is good, but having a cup of real coffee is greater. There is no doubt that you will enjoy this coffee more than others you have ever tasted.</p>
           <div className="header__button additional-indents width">
-            <a className="header__order-text" href="#">Learn More</a>
+            <a className="header__order-text" href="https://en.wikipedia.org/wiki/Coffee" target="_blank">Learn More</a>
           </div>
         </div>
         <img className="about-us__image" src='./coffee-image.png' alt="coffee-image" />

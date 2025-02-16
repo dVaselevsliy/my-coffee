@@ -4,8 +4,12 @@ import { Coffee } from "../types/Coffee"
 import { SORT_FIELD } from "../helper/sortField"
 
 export const init = createAsyncThunk('coffee/fetch', 
-  () => {
+  async () => {
     return getCoffee()
+      .then((data) => data.filter(arr => (
+        arr.name !== 'Himalayan Heights'
+        && arr.name !== 'Lazy Days'
+      )));
   }
 )
 
