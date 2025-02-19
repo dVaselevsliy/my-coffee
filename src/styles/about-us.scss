@@ -220,7 +220,10 @@
 
   &__button {
     width: fit-content;
-    margin: auto;
+
+    @media (max-width: 641px) {
+      margin: auto;
+    }
   }
 
   &__coffee-cup {
