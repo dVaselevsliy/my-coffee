@@ -1,12 +1,7 @@
 import { NavLink } from "react-router-dom"
-import { Header } from "../Components/Header"
-import { ModalWindow } from "../Components/ModalWindow"
-import { useAppSelector } from "../redux/hooks"
 import { useEffect, useRef, useState } from "react"
-import { Footer } from "../Components/Footer"
 
 export const AboutUsPage = () => {
-  const { modal } = useAppSelector(state => state.modal)
 
   const [translateX, setTranslateX] = useState(0)
 
@@ -22,7 +17,7 @@ export const AboutUsPage = () => {
     } else if (windowSize.current > 720) {
       setTranslateX((prev) => prev - 600 < 0 ? 0 : prev - 600)
     } else {
-      setTranslateX((prev) => prev - 300 < 0 ? 0 : prev - 300)
+      setTranslateX((prev) => prev - 341 < 0 ? 0 : prev - 341)
     }
   }
 
@@ -33,7 +28,7 @@ export const AboutUsPage = () => {
     } else if (windowSize.current > 720) {
       setTranslateX((prev) => prev + 600 > 600 * 2 ? 600 * 2 : prev + 600)
     } else {
-      setTranslateX((prev) => prev + 300 > 300 * 2 ? 300 * 2 : prev + 300)
+      setTranslateX((prev) => prev + 341 > 341 * 2 ? 341 * 2 : prev + 341)
     }
   }
 
@@ -52,29 +47,26 @@ export const AboutUsPage = () => {
   
   return (
     <>
-    <div className="header__dark-theme">
-        <Header />
-      </div>
-      {modal.modalActive && 
-        <ModalWindow />
-      }
-      <div className="about-us">
+      <div className="about-us section-padding" id="about-us">
         <div className="about-us__title">
-          <h2 className="about-us__h2">Discover the best coffee</h2>
+          <h2 className="about-us__h2 title">Discover the best coffee</h2>
           <p className='about-us__paragraf'>Bean Scene is a coffee shop that provides you with quality coffee that helps boost your productivity and helps build your mood. Having a cup of coffee is good, but having a cup of real coffee is greater. There is no doubt that you will enjoy this coffee more than others you have ever tasted.</p>
-          <div className="header__button additional-indents width">
-            <a className="header__order-text" href="https://en.wikipedia.org/wiki/Coffee" target="_blank">Learn More</a>
-          </div>
+          <a
+            className="yellow-btn about-us__button"
+            href="https://en.wikipedia.org/wiki/Coffee"
+            target="_blank"
+          >Learn More
+          </a>
         </div>
         <img className="about-us__image" src='./coffee-image.png' alt="coffee-image" />
       </div>
         <div className="why-we-different">
             <img className="why-we-different__coffee-image" src='./coffee-blast.png' alt="coffee-image" />
-            <h2 className="why-we-different__title">Why are we different?</h2>
+            <h2 className="title why-we-different__margin">Why are we different?</h2>
             <p className="why-we-different__text about-us__paragraf">We don’t just make your coffee, we make your day!</p>
       </div>
       
-      <div className="section">
+      <div className="section section-padding">
         <div className="section__container">
           <img className="section__image" src='./coffee-beans.png' alt="coffee-beans" />
             <h5 className="section__title">Supreme Beans</h5>
@@ -102,29 +94,26 @@ export const AboutUsPage = () => {
 
       <div className="start">
         <p className="start__text">Great ideas start with great coffee, Lets help you achieve that.</p>
-        <h5 className="start__title">Get started today.</h5>
+        <h5 className="title start__title">Get started today.</h5>
       </div>
 
-      <div className="order-section">
-        <div className="order-section__as">
+      <div className="order-section section-padding">
           <div className="order-section__text">
-            <h2 className="order-section__text--title">Get a chance to have an Amazing morning</h2>
+          <h2 className="title order-section__text--title">
+            Get a chance to have an <br/> Amazing morning
+          </h2>
             <p className="order-section__text--paragraf">We are giving you are one time opportunity to
               experience a better life with coffee.</p>
-              <div className="header__button additional-indents width auto">
-              <NavLink className="header__order-text padding-optimization media padding-fix" to="/menu">Order Now</NavLink>
-            </div>
-        </div>
-        </div>
+              <NavLink className="yellow-btn order-section__button" to="/menu">Order Now</NavLink>
+      
+          </div>
 
-        <div className="order-section__image">
           <img className="order-section__coffee-cup" src="./cup.png" alt="coffee-cup" />
-          <img className="order-section__coffee-bean" src="./many-coffee-bean.png" alt="coffee-bean" />
-        </div>
+
       </div>
-      <div className="about-us-carousel">
-        <h2 className="why-we-different__title">Our coffee perfection feedback</h2>
-        <p className="why-we-different__text about-us__paragraf">Our customers has amazing things to say about us</p>
+      <div className="about-us-carousel section-padding">
+        <h2 className="title why-we-different__heading">Our coffee perfection feedback</h2>
+        <p className="why-we-different__text about-us__paragraf">Our customers have amazing things to say about us</p>
         
         <div className="about-us-carousel__wrapper">
         <div style={{
@@ -139,7 +128,7 @@ export const AboutUsPage = () => {
             <div className="about-us-carousel__person-info">
               <h3 className="why-we-different__title about-us-carousel__name">Jonny Thomas</h3>
               <p className="why-we-different__text about-us-carousel__position">Project Manager</p>
-              <img className="about-us-carousel__person-photo" src="./person-photo.png" alt="person photo" />
+              <img className="about-us-carousel__person-photo" src="./man-1.jpg" alt="person photo" />
             </div>
           </div>
 
@@ -151,7 +140,7 @@ export const AboutUsPage = () => {
               <div className="about-us-carousel__person-info">
                 <h3 className="why-we-different__title about-us-carousel__name">Ryan Gosling</h3>
                 <p className="why-we-different__text about-us-carousel__position">Driver</p>
-                <img className="about-us-carousel__person-photo" src="./ryan-gosling.jpg" alt="person photo" />
+                <img className="about-us-carousel__person-photo" src="./man-2.jpg" alt="person photo" />
               </div>
             </div>
           
@@ -163,7 +152,7 @@ export const AboutUsPage = () => {
             <div className="about-us-carousel__person-info">
               <h3 className="why-we-different__title about-us-carousel__name">Jonny Thomas</h3>
               <p className="why-we-different__text about-us-carousel__position">Project Manager</p>
-              <img className="about-us-carousel__person-photo" src="./person-1.jpg" alt="person photo" />
+              <img className="about-us-carousel__person-photo" src="./man-3.jpg" alt="person photo" />
             </div>
             </div>
           </div>
@@ -172,17 +161,16 @@ export const AboutUsPage = () => {
         
         <button
           onClick={handleLeftClick}
-          className="about-us-carousel__button--left">
+          className="about-us-carousel__button left">
           <img className="about-us-carousel__arrow-icon" src="./arrow-left.png" alt="arrow-left.png" />
         </button>
 
         <button
           onClick={handleRightClick}
-          className="about-us-carousel__button--right">
+          className="about-us-carousel__button right">
           <img className="about-us-carousel__arrow-icon" src="./arrow-rigth.png" alt="arrow-rigth.png" />
         </button>
       </div>
-      <Footer />
     </>
   )
 }

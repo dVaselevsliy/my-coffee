@@ -1,12 +1,15 @@
 import { NavLink } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import iconBurger from '../images/Icon-Burger-menu.png';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { actions as actionsModal } from '../reducers/modalContent';
 
 export const Header = () => {
   const dispatch = useAppDispatch()
+  const { pathname } = useLocation();
   const { modal } = useAppSelector(state => state.modal)
 
+  /* exists everywhere */
   const scrollToContacts = () => {
     const contactsElement = document.getElementById('contacts')
     
@@ -15,9 +18,21 @@ export const Header = () => {
     }
   }
 
+  /* exists only on home page */
+  const scrollToSection = (elementId: string) => {
+    if (pathname !== '/') {
+      window.location.href = `/#/#${elementId}`;
+    } else {
+      // Scroll to the element immediately
+      const element = document.getElementById(elementId);
+      if (element) {
+        window.scrollTo({ top: element.offsetTop, behavior: "smooth" });
+      }
+    }
+  }
+
   return (
-    <header className="header" id='header'>
-      <div className="header__top">
+    <header className="header section-padding" id='header'>
         <span className="header__bean-scene">Bean Scene</span>
 
         <div className="header__links">
@@ -27,7 +42,10 @@ export const Header = () => {
             onClick={() => window.scrollTo(0, 0)}
           >Home</NavLink>
             <NavLink onClick={() => window.scrollTo(0, 0)} className="header__link" to="/menu">Menu</NavLink>
-            <NavLink onClick={() => window.scrollTo(0, 0)} className="header__link" to="/about-us">About Us</NavLink>
+          <button
+            onClick={() => scrollToSection('about-us')}
+            className="header__link"
+          >About Us</button>
           <button
             onClick={() => {
               scrollToContacts()
@@ -45,7 +63,7 @@ export const Header = () => {
             onClick={() => {
               dispatch(actionsModal.setModalActive(!modal.modalActive))
             }}
-            className="header__button header__sign-in--text-black">
+            className="yellow-btn">
             SignUp
           </div>
         </div>
@@ -54,7 +72,7 @@ export const Header = () => {
         <NavLink to="/aside" className="header__icon header__icon--burger">
               <img src={iconBurger} alt="icon-burger.png" />
           </NavLink>
-      </div>
+
     </header>
   );
 };

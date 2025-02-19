@@ -13,3 +13,52 @@ body {
   color: $text-white-color;
   box-sizing: border-box;
 }
+
+a {
+  color: #1E1E1E;
+}
+
+img {
+  filter: none !important; /* to overwrite opera default style */
+}
+
+.section-padding {
+  padding-inline: 100px;
+
+  @media (max-width: 1100px) {
+    padding-inline: 60px;
+  }
+
+  @media (max-width: 641px) {
+    padding-inline: 30px;
+  }
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.yellow-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+  min-width: 100px;
+  border-radius: 24px;
+  padding-inline: 20px;
+  background-color: #F9C06A;
+  color: #1E1E1E;
+  font-weight: bold;
+  font-size: 16px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.title {
+  font-size: 50px;
+  color: #7e4b10;
+  font-weight: bold;
+}
+

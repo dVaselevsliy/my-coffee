@@ -26,7 +26,7 @@ export const Footer = () => {
         {!subscribe && (
       <div className="footer">
         <div className="footer__container">
-          <h2 className="footer__title">Subscribe to get the Latest News</h2>
+          <h2 className="title footer__title">Subscribe to get the Latest News</h2>
           <p className="footer__paragraf">Don’t miss out on our latest news, updates, tips and special offers</p>
 
           <div className="footer__input-box">
@@ -73,18 +73,6 @@ export const Footer = () => {
             </div>
             </div>
           </div>
-
-            <div className="footer-down__second-column">
-              <h5 className="footer-down__second-column--title">Pages</h5>
-
-              <NavLink className="footer-down__second-column--section" to="/">Home</NavLink>
-              <NavLink className="footer-down__second-column--section" to="/menu">Menu</NavLink>
-              <NavLink className="footer-down__second-column--section" to="/about-us">About us</NavLink>
-              <button
-                onClick={() => window.scrollTo(0, 0)}
-                className="footer-down__second-column--section">Top
-              </button>
-            </div>
 
             <div className="footer-down__third-column" id="contacts">
               <h5 className="footer-down__third-column--title">Contact Us</h5>

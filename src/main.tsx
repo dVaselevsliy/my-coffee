@@ -7,7 +7,6 @@ import { store } from './redux/store'
 import { HomePage } from './pages/HomePage'
 import { ProductsPage } from './pages/ProductPage'
 import { Aside } from './pages/Aside'
-import { AboutUsPage } from './pages/AboutUsPage'
 import { Provider } from 'react-redux';
 import { SelectedCoffee } from './pages/SelectedCoffee';
 import { ScroolMyTop } from './Components/scroolMyTop'
@@ -23,7 +22,6 @@ createRoot(document.getElementById('root')!).render(
               <Route index element={<HomePage />} /> 
               <Route path='menu' element={<ProductsPage />} />
               <Route path='aside' element={<Aside />} />
-              <Route path='about-us' element={<AboutUsPage />} />
               <Route path='selected-coffee'>
                 <Route index element={<SelectedCoffee />}/>
                 <Route path=':productId?' element={<SelectedCoffee />} />

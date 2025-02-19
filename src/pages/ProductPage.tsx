@@ -14,6 +14,8 @@ import { SORT_FIELD, sortArray } from "../helper/sortField";
 
 export const ProductsPage = () => {
   const [, setActiveFilter] = useState(SORT_FIELD.All)
+  const [activeCountry, setActiveCountry] = useState(SORT_FIELD.All)
+  const [activeSort, setActiveSort] = useState('all')
   
   const dispatch = useAppDispatch()
   const { coffee } = useAppSelector(state => state.coffee)
@@ -23,29 +25,8 @@ export const ProductsPage = () => {
   const query = searchParams.get('query') || ''
   const country = searchParams.get('country') || ''
   const sortAll = searchParams.get('sort') || ''
-  
-  const [debouncedQuery] = useDebounce(query, 300)
 
-/*   const updateSearchParams = useCallback(
-    (newParams: Record<string, string | string[]>) => {
-      setSearchParams((prevParams) => {
-        const params = new URLSearchParams(prevParams)
-    
-        Object.entries(newParams).forEach(([key, value]) => {
-          if (!value) {
-            params.delete(key)
-          } else if (Array.isArray(value)) {
-            params.delete(key)
-            value.forEach(item => params.append(key, item.toString()))
-          } else {
-            params.set(key, value.toString())
-          }
-        })
-  
-        return params
-      })
-    }, [setSearchParams]
-  ) */
+  const [debouncedQuery] = useDebounce(query, 300)
   
   useEffect(() => {
     const params = new URLSearchParams(searchParams)
@@ -54,6 +35,57 @@ export const ProductsPage = () => {
 
     setSearchParams(params)
   }, [searchParams, setSearchParams, coffee.sortField])
+
+  useEffect(() => {
+    if (activeSort === 'all') {
+      dispatch(actionsCoffee.setSort(0))
+      dispatch(actionsCoffee.setAlphabeticallySort(false));
+      dispatch(actionsCoffee.setRoastLevelSort(false));
+      dispatch(actionsCoffee.setPriceSort(false))
+    }
+
+    if (activeSort === 'price-low-high') {
+      dispatch(actionsCoffee.setSort(1))
+      dispatch(actionsCoffee.setAlphabeticallySort(false));
+      dispatch(actionsCoffee.setRoastLevelSort(false));
+      dispatch(actionsCoffee.setPriceSort(true))
+    }
+
+    if (activeSort === 'price-high-low') {
+      dispatch(actionsCoffee.setSort(2))
+      dispatch(actionsCoffee.setAlphabeticallySort(false));
+      dispatch(actionsCoffee.setRoastLevelSort(false));
+      dispatch(actionsCoffee.setPriceSort(true))
+    }
+
+    if (activeSort === 'alphabetically-asc') {
+      dispatch(actionsCoffee.setSort(1))
+      dispatch(actionsCoffee.setAlphabeticallySort(true));
+      dispatch(actionsCoffee.setRoastLevelSort(false));
+      dispatch(actionsCoffee.setPriceSort(false))
+    }
+
+    if (activeSort === 'alphabetically-desc') {
+      dispatch(actionsCoffee.setSort(2))
+      dispatch(actionsCoffee.setAlphabeticallySort(true));
+      dispatch(actionsCoffee.setRoastLevelSort(false));
+      dispatch(actionsCoffee.setPriceSort(false))
+    }
+    
+    if (activeSort === 'roast-level-low-high') {
+      dispatch(actionsCoffee.setSort(1))
+      dispatch(actionsCoffee.setAlphabeticallySort(false));
+      dispatch(actionsCoffee.setRoastLevelSort(true));
+      dispatch(actionsCoffee.setPriceSort(false))
+    }
+    
+    if (activeSort === 'roast-level-high-low') {
+      dispatch(actionsCoffee.setSort(2))
+      dispatch(actionsCoffee.setAlphabeticallySort(false));
+      dispatch(actionsCoffee.setRoastLevelSort(true));
+      dispatch(actionsCoffee.setPriceSort(false))
+    } 
+  }, [activeSort, dispatch])
   
   useEffect(() => {
     if (sortAll) {
@@ -164,7 +196,7 @@ export const ProductsPage = () => {
             <form>
               <div className="menu--header__field">
                 <div className="menu--header__query-field">
-                  <label className="menu--header__title" htmlFor="title">Product Name:</label>
+                  <label className="menu--header__title" htmlFor="title">Search by name:</label>
                   <div>
                     <input
                       className="input is-normal min-width width-on-phone"
@@ -177,92 +209,75 @@ export const ProductsPage = () => {
                   </div>
                 </div>
 
-                  <div className="filter">
-                    <div className="filter__option">
+                <div className="filter">
+                  <h2 className="filter__text">Filter by country:</h2>
+                  <select
+                    className="filter__option"
+                    value={activeCountry}
+                    onChange={(event) => {
+                      setActiveCountry(event.target.value)
+                      setActiveFilter(event.target.value)
+                      dispatch(actionsCoffee.setSortField(event.target.value))
+                    }}
+                  >
                     {sortArray.map(sort => (
-                        <button
-                            key={sort.id}                        
-                            onClick={() => {
-                            setActiveFilter(sort.id)
-                            dispatch(actionsCoffee.setSortField(sort.id))
-                          }}
+                        <option
+                          key={sort.id}
                           className={`filter__button ${coffee.sortField === sort.id && 'button-active'}`}>
                           {sort.name}
-                        </button>
+                        </option>
                     ))}
-                    </div>
+                    </select>
                 </div>
                 <div className="sort">
-                  <h5 className="sort__title">
-                    Sort by:
-                  </h5>
-                  <div className="sort__container">
-                    <div className="sort__section"
-                      onClick={() => {
-                        if (coffee.alphabeticallySort || coffee.roastLevelSort) {
-                            dispatch(actionsCoffee.setSort(0))
-                            dispatch(actionsCoffee.setAlphabeticallySort(false));
-                            dispatch(actionsCoffee.setRoastLevelSort(false));
-                            dispatch(actionsCoffee.setPriceSort(false))
-                            return
-                        }
-                        dispatch(actionsCoffee.setSort(coffee.sort + 1))
-                        dispatch(actionsCoffee.setPriceSort(true))
-                      }}
-                    >
-                      <strong
-                        className="sort__option">
-                        Price
-                      </strong>
-                      <img className={`sort__arrow ${
-                        coffee.sort === 2 && coffee.priceSort && 'sort__arrow--up'
-                        } ${
-                        coffee.sort === 1 && coffee.priceSort && 'sort__arrow--down'
-                        }`} src="./arrow.png" alt="" />
-                    </div>
-                    <div className="sort__section"
-                      onClick={() => {
-                        if (coffee.priceSort || coffee.roastLevelSort) {
-                            dispatch(actionsCoffee.setSort(0))
-                            dispatch(actionsCoffee.setPriceSort(false))
-                            dispatch(actionsCoffee.setRoastLevelSort(false))
-                            return
-                        }
-                        dispatch(actionsCoffee.setAlphabeticallySort(true));
-                        dispatch(actionsCoffee.setSort(coffee.sort + 1))
-                      }}
-                    >
-                      <strong
-                      className="sort__option"
+                <h2 className="filter__text">Sort by:</h2>
+                  <select
+                    value={activeSort}
+                    onChange={(event) => {
+                      setActiveSort(event.target.value)
+                    }}
+                    className="sort__title"
+                  >
+                    <option
+                      value={'all'}
+                      className="sort__section">
+                      Select sort
+                    </option>
+
+                    <option className="sort__section" value={'price-low-high'}>
+                        Price low-high
+                    </option>
+
+                    <option className="sort__section"
+                        value={'price-high-low'}
                       >
-                        Alphabetically
-                      </strong>
-                      <img className={`sort__arrow ${
-                        coffee.sort === 2 && coffee.alphabeticallySort && 'sort__arrow--up'
-                        } ${
-                          coffee.sort === 1 && coffee.alphabeticallySort && 'sort__arrow--down'
-                        }`} src="./arrow.png" alt="" />
-                    </div>
-                    <div className="sort__section"
-                      onClick={() => {
-                        if (coffee.priceSort || coffee.alphabeticallySort) {
-                          dispatch(actionsCoffee.setSort(0))
-                          dispatch(actionsCoffee.setPriceSort(false))
-                          dispatch(actionsCoffee.setAlphabeticallySort(false))
-                          return
-                        }
-                        dispatch(actionsCoffee.setRoastLevelSort(true))
-                        dispatch(actionsCoffee.setSort(coffee.sort + 1))
-                      }}
+                        Price high-low
+                    </option>
+
+                    <option className="sort__section"
+                      value={'alphabetically-asc'}
                     >
-                      <strong className="sort__option">Roast Level</strong>
-                      <img className={`sort__arrow ${
-                        coffee.sort === 2 && coffee.roastLevelSort && 'sort__arrow--up'
-                        } ${
-                        coffee.sort === 1 && coffee.roastLevelSort && 'sort__arrow--down'
-                        }`} src="./arrow.png" alt="" />
-                    </div>
-                  </div>
+                      Alphabetically
+                    </option>
+
+                    <option className="sort__section"
+                      value={'alphabetically-desc'}
+                    >
+                      Alphabetically-reverse
+                    </option>
+                    
+                    <option className="sort__section"
+                      value={'roast-level-low-high'}
+                    >
+                      Roast level low-high
+                    </option>
+
+                    <option className="sort__section"
+                      value={'roast-level-high-low'}
+                    >
+                      Roast level high-low
+                    </option>
+                  </select>
                 </div>
               </div> 
             </form>
@@ -282,14 +297,18 @@ export const ProductsPage = () => {
               <p className="product__description">{coffee.description}</p>
               <span className="product__price">{`$${coffee.price}`}</span>
 
-              <div
+
+              <NavLink
                 onClick={() => {
                   dispatch(actionsCoffee.setSelectedProductId(coffee.id))
                   dispatch(actionsModal.setBuySuccessfully(false))
                 }}
-                className="header__button additional-indents absolute">
-                <NavLink className="header__order-text" to={`/selected-coffee/${coffee.id}`}>Order Now</NavLink>
-              </div>
+                className="yellow-btn product__button"
+                to={`/selected-coffee/${coffee.id}`}
+                >
+                  Order Now
+                </NavLink>
+
             </div>
         ))}
         </main>

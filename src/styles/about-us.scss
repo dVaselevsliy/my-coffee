@@ -17,10 +17,13 @@
     text-align: center;
   }
 
+  &__button {
+    margin-top: 30px;
+    width: fit-content;
+  }
+
   &__h2 {
-    color: #7e4b10;
-    font-weight: bold;
-    padding-bottom: 20px;
+    margin-bottom: 30px;
   }
 
   &__title {
@@ -28,10 +31,9 @@
     font-weight: bold;
     font-size: 39px;
     box-sizing: border-box;
-    margin: 110px 0px 80px 80px;
+    margin: 110px 0px 80px;
 
     @include mixins.onPhoneAndTablet {
-      margin: 7px;
       margin-top: 140px;
       display: grid;
       justify-items: center;
@@ -88,6 +90,11 @@
   text-align: center;
   position: relative;
 
+  &__margin {
+    margin: 20px;
+    margin-top: 100px;
+  }
+
   &__coffee-image {
     position: absolute;
     width: 500px;
@@ -101,8 +108,13 @@
 
     @media (max-width: 600px) {
       width: 240px;
-      bottom: 140px;
+      bottom: 233px;
     }
+  }
+
+  &__heading {
+    margin: 20px;
+    margin-top: 100px;
   }
   
   &__title {
@@ -149,13 +161,6 @@
   &__image {
     width: 35%;
     margin: 30px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-   
-    &:hover {
-      transform: translateY(-20px) scale(1.1) rotate(-3deg);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-    }
   }
 
   &__title {
@@ -188,96 +193,75 @@
   }
 
   &__title {
-    font-size: 48px;
-    color: #7e4b10;
-    font-weight: bold;
-    margin-bottom: 50px;
+    margin-bottom: 150px;
+    font-size: 46px;
   }
 }
 
 .order-section {
   color: #FFFFFF;
-  position: relative;
   background: linear-gradient(rgba(135, 73, 0, 0.7), rgba(139, 69, 19, 0.7)),
   url(/order-phone.png);
   min-height: 80vh;
-  margin-bottom: 20px;
-  box-sizing: border-box;
+  /* margin-bottom: 20px; */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10vw;
+  padding-block: 40px;
 
   @media (max-width: 850px) {
-    display: flex;
     flex-direction: column;
+    gap: 50px;
   }
 
-  &__as {
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+  &__button {
+    width: fit-content;
+    margin: auto;
   }
 
   &__coffee-cup {
-    position: absolute;
-    z-index: 1;
-    height: 450px;
+    height: auto;
     width: 300px;
-    right: 109px;
-    bottom: 130px;
+    filter: none;
 
-    @media (max-width: 850px) {
-      left: 50%;
-      transform: translate(-50%);
-      bottom: 10px;
+    @media (max-width: 641px) {
+      width: 250px;
     }
-
-    @media (max-width: 440px) {
-      height: 342px;
-      width: 260px;
-    }
-  }
-
-  &__coffee-bean {
-    width: 100%;
-  }
-  
-  &__image {
-    display: flex;
-
   }
 
   &__text {
-    margin-left: 100px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    
 
     @media (max-width: 850px) {
+      text-align: center;
       margin-left: 0;
     }
 
     &--title {
-      font-size: 52px;
-      color: #FFFFFF;
-      font-weight: bold;
+      color: #ffffff;
+
+      @media (max-width: 850px) {
+        font-size: 46px;
+      }
+
+      @media (max-width: 641px) {
+        font-size: 38px;
+      }
     }
 
     &--paragraf {
       font-size: 20px;
-      color: #FFFFFF;
-      margin: 20px;
-      text-align: start;
       max-width: 381px;
-      margin-top: 40px;
       margin-block: 40px;
 
       @media (max-width: 850px) {
-        margin: auto;
-        text-align: center;
-        padding-bottom: 20px;
+        margin: 30px auto;
       }
     }
   }
@@ -299,6 +283,12 @@
   max-width: 1080px;
   flex-shrink: 0;
   transition: transform 0.5s;
+  margin-bottom: 85px;
+  background-color: #FFF9F1;
+  border: 1px solid #F9C06A;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   @media (max-width: 1200px) {
     display: flex;
@@ -308,7 +298,7 @@
   }
 
   @media (max-width: 720px) {
-    max-width: 300px;
+    max-width: 341px;
   }
 }
 
@@ -338,8 +328,6 @@
   &__wrapper {
     width: 1080px;
     overflow: hidden;
-    background-color: #FFF9F1;
-    border: 1px solid #F9C06A;
     margin: 20px;
 
     @media (max-width: 1200px) {
@@ -353,45 +341,29 @@
 
   &__icon-six {
     width: 94px;
-    height: 85px;
+    height: 61px;
     margin: 40px 0px 10px 40px;
     align-self: baseline;
     display: flex;
   }
 
-  &__button--right {
-    position: absolute;
-    width: 82px;
-    height: 82px;
-    background-color: #F9C06A;
-    border-radius: 16px;
-    transform: translate(660%, 155%);
-    cursor: pointer;
-
-    @media (max-width: 1200px) {
-      transform: translate(368%, 161%);
-    }
-
-    @media (max-width: 720px) {
-      transform: translate(159%, 156%);
-    }
+  &__arrow-icon {
+    width: 16px;
+    height: 16px;
   }
 
-  &__button--left {
+  &__button {
     position: absolute;
     width: 82px;
     height: 82px;
-    transform: translate(-660%, 155%);
+    border: none;
     background-color: #F9C06A;
     border-radius: 16px;
     cursor: pointer;
 
     @media (max-width: 1200px) {
-      transform: translate(-368%, 156%);
-    }
-
-    @media (max-width: 720px) {
-      transform: translate(-159%, 156%);
+      width: 62px;
+      height: 62px;
     }
   }
 
@@ -408,15 +380,15 @@
     margin-inline: 100px;
     color: #707070;
     line-height: 36px;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
-
+    
     @media (max-width: 720px) {
       margin-inline: 83px;
       color: #707070;
       font-size: 16px;
       font-weight: bold;
-      text-align: end;
+      text-align: center;
     }
   }
 
@@ -424,15 +396,40 @@
     color: #707070;
     line-height: 34px;
     font-size: 20px;
+    margin-bottom: -20px;
   }
 
   &__person-photo {
     width: 140px;
     height: 140px;
-    margin-bottom: 20px;
+    object-fit: cover;
+    transform: translateY(50%);
     border-radius: 16px;
   }
 }
 
+.right {
+  transform: translate(660%, 100%);
+
+  @media (max-width: 1200px) {
+    transform: translate(482%, 161%);
+  }
+
+  @media (max-width: 720px) {
+    transform: translate(275%, 114%);
+  }
+}
+
+.left {
+  transform: translate(-660%, 100%);
+
+  @media (max-width: 1200px) {
+    transform: translate(-482%, 156%);
+  }
+
+  @media (max-width: 720px) {
+    transform: translate(-275%, 114%);
+  }
+}
 
 
