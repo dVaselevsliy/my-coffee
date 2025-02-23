@@ -1,10 +1,15 @@
 import { useEffect } from "react"
-import { NavLink, useLocation } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import { Header } from "../Components/Header"
 import { ModalWindow } from "../Components/ModalWindow"
 import { useAppSelector } from "../redux/hooks"
 import { Footer } from "../Components/Footer"
-import { AboutUsPage } from "./AboutUsPage"
+import { HomePageSection1 } from "../Components/HomePageSection1"
+import { HomePageSection2 } from "../Components/HomePageSection2"
+import { HomePageSection3 } from "../Components/HomePageSection3"
+import { HomePageSection4 } from "../Components/HomePageSection4"
+import { HomePageSection5 } from "../Components/HomePageSection5"
+import { HomePageSection6 } from "../Components/HomePageSection6"
 
 export const HomePage = () => {
   const location = useLocation();
@@ -26,32 +31,21 @@ export const HomePage = () => {
       const timeoutId = setTimeout(scrollToElement, 50);
       return () => clearTimeout(timeoutId);
     }
-  }, []);
+  }, [location.hash]);
 
   return (
-    <div>
-      <div className="home-page">
-        <Header />
-        {modal.modalActive && 
-          <ModalWindow />
-        }
-        <div className="home-page__main section-padding">
-          <p className="home-page__title">We’ve got your morning covered with</p>
-          
-          <h1 className="home-page__coffee">Coffee</h1>
-  
-          <p className="home-page__description">
-            It is best to start your day with a cup of coffee. Discover the
-            best flavours coffee you will ever have. We provide the best
-            for our customers.
-          </p>
-  
-            <NavLink className="yellow-btn home-page__btn"
-              to="/menu">Order Now</NavLink>
-        </div>
-      </div>
-          <AboutUsPage />
-        <Footer />
+    <div className="home-page">
+      <Header />
+      {modal.modalActive && 
+        <ModalWindow />
+      }
+      <HomePageSection1 />
+      <HomePageSection2 />
+      <HomePageSection6 />
+      <HomePageSection3 />
+      <HomePageSection4 />
+      <HomePageSection5 />
+      <Footer />
     </div>
   )
 } 

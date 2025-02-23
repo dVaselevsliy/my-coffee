@@ -40,8 +40,16 @@ export const Header = () => {
             className="header__link"
             to="/"
             onClick={() => window.scrollTo(0, 0)}
-          >Home</NavLink>
-            <NavLink onClick={() => window.scrollTo(0, 0)} className="header__link" to="/menu">Menu</NavLink>
+          >
+            Home
+          </NavLink>
+            <NavLink
+              onClick={() => window.scrollTo(0, 0)}
+              className="header__link"
+              to="/menu"
+            >
+              Menu
+            </NavLink>
           <button
             onClick={() => scrollToSection('about-us')}
             className="header__link"

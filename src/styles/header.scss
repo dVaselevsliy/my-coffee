@@ -2,75 +2,6 @@ $text-white-color: #fff;
 
 @use './mixins.scss' as mixins;
 
-.home-page {
-  min-height: 100vh;
-  background-image: url('/header-bg.png');
-  box-sizing: border-box;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  color: $text-white-color;
-  position: relative;
-
-  &__main {
-    flex-direction: column;
-    align-items: baseline;
-    display: flex;
-    justify-content: center;
-    height: 100vh;
-
-    @media (max-width: 900px) {
-      align-items: center;
-    }
-  }
-  
-
-  &__title {
-    font-size: 22px;
-    margin-top: 15px;
-
-    @media (max-width: 900px) {
-      width: 366px;
-    }
-
-    @media (max-width: 400px) {
-      width: 320px;
-      text-align: center;
-    }
-  }
-
-
-  &__coffee {
-    font-size: 220px;
-    font-weight: 400;
-    margin: -15px 0 0px;
-    font-family: "Clicker Script", serif;
-    cursor:default;
-
-    @media (max-width: 600px) {
-      font-size: 120px;
-    }
-  }
-
-  &__description {
-    line-height: 34px;
-    font-size: 20px;
-    text-align: start;
-    width: 530px;
-    border-radius: 20px;
-    padding: 20px;
-    background-color: rgb(111 110 104 / 50%);
-
-     @media (max-width: 600px) {
-      width: auto;
-    }
-  }
-
-  &__btn {
-    margin-top: 20px;
-  }
-}
-
 .additional-indents {
   padding: 10px;
   margin: 20px;
@@ -88,6 +19,21 @@ $text-white-color: #fff;
   align-items: center;
   justify-content: space-between;
   padding-block: 10px;
+
+  &__top {
+    width: 100%;
+    position: fixed;
+    z-index: 2;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 10px;
+  }
+
+  &__bottom-close {
+    padding-top: 5px;
+  }
   
   &__order-text {
     display: flex;
@@ -100,11 +46,6 @@ $text-white-color: #fff;
     padding: 0px 0px;
   }
 
-  &__dark-theme {
-    color: #443b3b;
-    background-color: #9e9a8e;
-  }
-  
   &__icon {
 
     &--burger {
@@ -213,19 +154,12 @@ $text-white-color: #fff;
   padding: 6px 10px 10px 14px;
 }
 
-.modal-window {
-  position: relative;
-}
-
 .box-settings {
-  position: absolute;
+  position: fixed;
   display: flex;
   flex-direction: column;
   z-index: 1;
-  top: 100px;
-  right: 0;
   width: 400px;
-  transform: translate(-50px);
 
   &__delete {
     display: flex;
@@ -239,7 +173,6 @@ $text-white-color: #fff;
 
   @media (max-width: 500px) {
     width: 356px;
-    transform: translate(-10px);
   }
 }
 
@@ -264,6 +197,28 @@ $text-white-color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 100;
+
+  .box {
+    transition: height 500ms ease-in-out;
+  }
+
+  &__error {
+    text-align: center;
+    color: red;
+  }
+
+  &__success {
+    text-align: center;
+    color: green;
+
+    &__link {
+      text-decoration: underline green;
+      color: inherit;
+      margin-left: 5px;
+      font-weight: 700;
+    }
+  }
 }
 
 .box-modal {
@@ -280,3 +235,4 @@ $text-white-color: #fff;
     width: 320px;
   }
 }
+

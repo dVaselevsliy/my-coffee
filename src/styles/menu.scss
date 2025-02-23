@@ -20,8 +20,7 @@
   &__title {
     font-size: 54px;
     color: #442808;
-    font-weight: bold;
-    margin-top: 92px;
+    margin-top: 135px;
   }
 
   &__under-title {
@@ -48,6 +47,30 @@
 
     @media (max-width: 508px) {
       flex-direction: column;
+    }
+  }
+
+  &__input {
+    padding: 9px;
+    border: 2px solid #ffe08a;
+    text-align: left;
+    font-size: 16px;
+    color: rgb(68, 40, 8);
+    border-radius: 4px;
+    outline: none;
+    width: 201px;
+    font-family: "Playfair Display", serif;
+
+    &:focus {
+      border: 2px solid #ffe08a;
+    }
+
+    &:hover {
+      border: 2px solid #ffe08a;
+    }
+
+    &:active {
+      border: 2px solid #ffe08a;
     }
   }
 
@@ -123,16 +146,6 @@
     text-align: center;
   }
 
-  &__form {
-    color: #1E1E1E; 
-    display: flex;
-    justify-content: center;
-
-    @media (max-width: 1343px) {
-     justify-content: center;
-    }
-  }
-
   &__select {
 
     &--text {
@@ -144,13 +157,12 @@
 
   &__field {
     display: flex;
+    justify-content: center;
     gap: 20px;
-    align-items: end;
-    justify-content: space-between;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 
-    @media (max-width: 1343px) {
+    @media (max-width: 900px) {
       flex-direction: column-reverse;
       align-items: center;
     }
@@ -163,6 +175,7 @@
     min-width: 212px;
     text-align: initial;
     margin-left: 10px;
+    margin-bottom: 15px;
   }
 }
 
@@ -172,7 +185,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 10px;
+  margin-bottom: 10px;
   border: 1px solid #eccd9f;
 
   &__image-container {
@@ -259,7 +272,7 @@
 
 .min-width {
   width: 201px;
-  height: 43px;
+  height: 45px;
 }
 
 .input::placeholder {
@@ -287,26 +300,28 @@
     font-weight: bold;
     color: #442808;
     min-width: 212px;
-    text-align: left;
+    text-align: initial;
     margin-left: 10px;
+    margin-bottom: 15px;
   }
 
   &__option {
     padding: 9px;
-    border: 1px solid rgb(219, 219, 219);
-    text-align: center;
-    font-size: 14px;
+    border: 2px solid #ffe08a;
+    text-align: left;
+    font-size: 16px;
     color: rgb(68, 40, 8);
-    border-radius: 6px;
+    border-radius: 4px;
     outline: none;
     width: 201px;
+    font-family: "Playfair Display", serif;
   }
 
   &__button {
     padding: 8px 7px; 
     border: 1px solid black;
     margin: 10px;
-    text-align: center;
+
     color: #000;
     border-radius: 5px;
     margin-inline: 10px;
@@ -317,8 +332,6 @@
     }
   }
 }
-
-
 
 .sort {
     display: flex;
@@ -331,13 +344,13 @@
 
   &__title {
     padding: 9px;
-    border: 1px solid #dbdbdb;
-    text-align: center;
-    font-size: 14px;
-    color: #442808;
-    border-radius: 6px;
-    width: 201px;
+    border: 2px solid #ffe08a;
+    font-size: 16px;
+    color: rgb(68, 40, 8);
+    border-radius: 4px;
     outline: none;
+    width: 201px;
+    font-family: "Playfair Display", serif;
 
   @media (max-width: 1586px) {
     align-self: center;

@@ -5,20 +5,22 @@
   background-size: cover;
   background-position: center;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-  &__container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
 
   &__title {
     color: #FFFFFF;
     margin-top: 130px;
     text-align: center;
 
-    @media (max-width: 830px) {
+    @media (max-width: 1100px) {
+      margin-top: 70px;
+    }
+
+    @media (max-width: 800px) {
       margin-top: 50px;
     }
 
@@ -27,7 +29,7 @@
     }
   }
 
-  &__paragraf {
+  &__paragraph {
     font-size: 20px;
     line-height: 34px;
     color: #FFFFFF;
@@ -47,6 +49,9 @@
 
   &__form {
     display: flex;
+    justify-content: center;
+    width: 100%;
+
     @media (max-width: 544px ) {
       flex-direction: column;
       align-items: center;
@@ -72,6 +77,7 @@
 
     @media (max-width: 544px ) {
       margin-top: 20px;
+      border-radius: 0;
     }
   }
 
@@ -149,12 +155,13 @@
     border-radius: 4px 0px 0px 4px;
     outline: none;
 
-    @media (max-width: 649px) {
-      min-width: 395px
+    @media (max-width: 700px) {
+      min-width: unset;
+      width: 100%;
     }
 
-    @media (max-width: 412px) {
-      min-width: 340px;
+    @media (max-width: 544px ) {
+      border-radius: 0;
     }
 
     &::placeholder {
@@ -166,17 +173,32 @@
 }
 
 .footer-down {
-  position: relative;
   display: flex;
   justify-content: center;
-  min-height: 80vh;
+  gap: 20%;
   color: #FFFFFF;
-  background: rgba(0, 0, 0, 0.5);
-  background: linear-gradient(to bottom, #6e3b02, #693c08, #6f3f07, #90530d);
+  background-color: #573207;
+  padding: 270px 100px 200px;
+
+  @media (max-width: 1500px) {
+    padding: 170px 70px 100px;
+    gap: 15%;
+  }
+
+  @media (max-width: 1000px) {
+    padding-inline: 50px;
+    gap: 50px;
+  }
+
+  @media (max-width: 641px) {
+    flex-direction: column;
+    padding-inline: 30px;
+  }
+
 
   &__image {
     position: absolute;
-    height: 80vh;
+    padding-block: 100px;
     top: 0px;
     right: 8px;
     transform: translate(8px);
@@ -188,111 +210,64 @@
 
   &__icons {
     display: flex;
-    justify-content: center;
-    padding: 20px;
+    gap: 20px;
+    margin-top: 20px;
   }
 
   &__icon {
-    width: 21px;
-    height: 16.5px;
-    margin: 20px 15px 0px 11px;
-    transition: transform 0.3 ease;
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease-in-out;
 
     &:hover {
       transform: scale(1.2);
     }
-  }
 
-  &__section {
-    display: flex;
-    align-self: center;
-    z-index: 1;
-    justify-content: center;
-    gap: 20px;
-
-     @media (max-width: 900px) {
-      display: flex;
-      gap: 20px;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
+    img {
+      object-fit: contain;
     }
   }
 
-  &__first-column {
+  @media (max-width: 1072px) {
+    &__column:nth-child(2) {
+      max-width: 300px;
+    }
+  }
+  
+
+  &__column {
     display: flex;
-    text-align: center;
     flex-direction: column;
-    background-color: rgba(153, 139, 122, 0.2392156863);
-    border-radius: 20px;
     justify-content: flex-start;
+    text-align: left;
+    gap: 20px;
     max-width: 350px;
-    padding: 20px;
 
-     @media (max-width: 900px) {
-      margin-top: 148px;
-    } 
+    @media (max-width: 850px) {
+      &:nth-child(2) {
+        max-width: 250px;
+      }
+    }
 
-    &--container {
-      align-items: center;
-      text-align: center
+    a {
+      color: inherit;
+    }
+
+    &__title {
+      font-size: 26px;
     }
   }
 
-  &__paragraf {
+  &__paragraph {
     max-width: 370px;
     font-size: 16px;
     margin-top: 15px;
-  }
-
-  &__third-column {
-    display: flex;
-    flex-direction: column;
-    border-radius: 20px;
-    padding: 25px;
-    text-align: center;
-    display: flex;
-    background-color: rgba(153, 139, 122, 0.2392156863);
-    justify-content: center;
-    max-width: 350px;
-
-    @media (max-width: 900px) {
-      margin-bottom: 100px;
-    } 
-
-    &--title {
-      font-size: 23px;
-      color: #FFFFFF;
-      font-weight: bold;
-      margin-bottom: 0px;
-      align-self: center;
-      max-width: 123px;
-
-      &:hover {
-        transform: scale(1.2);
-      }
-    }
-
-    &--section {
-      font-size: 18px;
-      text-decoration: none;
-      transition: all 0.3s ease-in-out;
-      padding-bottom: 15px;
-      color: #FFFFFF;
-      margin-top: 15px;
-
-
-    &:hover {
-      transform: scale(1.1);
-      color: #fff;
-      }
-    }
   }
 }
 
 .bump-logo {
   font-size: 54px;
+  line-height: 1;
 }
 
 .footer-margin {

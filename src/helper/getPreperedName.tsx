@@ -4,7 +4,7 @@ import { SORT_FIELD } from "./sortField";
 export const getPreperedName = (
   productArray: Coffee[],
   query: string,
-  sortField
+  sortField: string
 ) => {
   let preperedArray = [...productArray]
 

@@ -1,13 +1,15 @@
 import { FormEvent, useEffect, useState } from "react"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import { actions as actionsModal } from "../reducers/modalContent"
+import { NavLink } from "react-router-dom"
 
 export const ModalBuyWindow = () => {
-  const [card, setCard] = useState(0)
+  const [card, setCard] = useState('')
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errorInput, setErrorInput] = useState('')
+  const [isPurchaseSuccess, setIsPurchaseSuccess] = useState(false)
 
   const dispatch = useAppDispatch()
   const { modal } = useAppSelector(state => state.modal)
@@ -16,7 +18,7 @@ export const ModalBuyWindow = () => {
     event.preventDefault()
     setErrorInput('')
 
-    if (card.toString().length !== 16) {
+    if (card.toString().length !== 19) {
       setErrorInput('Card number should have 16 numbers')
       return
     }
@@ -36,17 +38,16 @@ export const ModalBuyWindow = () => {
       return
     }
 
-    dispatch(actionsModal.setBuySuccessfully(true))
+    setIsPurchaseSuccess(true)
     reset()
   }
 
   const reset = () => {
     setErrorInput('')
-    setCard(0)
+    setCard('')
     setName('')
     setEmail('')
     setPassword('')
-    dispatch(actionsModal.setModalBuyActive(false))
   }
 
   useEffect(() => {
@@ -60,6 +61,18 @@ export const ModalBuyWindow = () => {
       document.removeEventListener('keydown', handleKeyDown)
     }
   })
+
+  const formatCardNumber = (value: string) => {
+    return value
+      .replace(/\D/g, "") // Remove non-numeric characters
+      .replace(/(.{4})/g, "$1 ") // Add space after every 4 digits
+      .trim();
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const formattedValue = formatCardNumber(event.target.value);
+    setCard(formattedValue);
+  };
 
   return (
       <div className="modal-buy-window">
@@ -77,17 +90,17 @@ export const ModalBuyWindow = () => {
               <input
               autoFocus
               value={card || ''}
-              onChange={(event) => {
-                setCard(+event.target.value)
-              }}
-              className="input"
+              onChange={handleChange}
+              className={`input control--border field-font-family ${
+                errorInput === 'Card number should have 16 numbers' && 'is-danger'
+              }`}
               id="ccn"
               type="tel"
               inputMode="numeric"
               pattern="[0-9\s]{13,19}" 
               autoComplete="cc-number"
-              minLength={16}
-              maxLength={16}
+              minLength={19}
+              maxLength={19}
               placeholder="xxxx xxxx xxxx xxxx"
               required />
           </div>
@@ -97,7 +110,9 @@ export const ModalBuyWindow = () => {
           <label className="label">Name</label>
           <div className="control">
             <input
-              className="input"
+              className={`input control--border field-font-family ${
+                errorInput === 'Name should not be empty' && 'is-danger'
+              }`}
               type="text"
               required
               value={name}
@@ -118,7 +133,7 @@ export const ModalBuyWindow = () => {
                 onChange={(event) => {
                   setEmail(event.target.value)
                 }}
-                className={`input ${
+                className={`input control--border field-font-family ${
                   errorInput === 'Email should not be empty' && 'is-danger'
                 }`}
                 type="email"
@@ -133,7 +148,7 @@ export const ModalBuyWindow = () => {
                 onChange={(event) => {
                   setPassword(event.target.value)
                 }}
-                className={`input ${
+                className={`input control--border field-font-family ${
                   errorInput === 'Password should not be empty' && 'is-danger'
                 }`}
                 type="password"
@@ -143,10 +158,36 @@ export const ModalBuyWindow = () => {
           </>
         )}
 
+        <button
+          disabled={isPurchaseSuccess}
+          className="control__margin yellow-btn"
+        >
+          Place an order
+        </button>
 
-          <div className="order-button">
-            <button className="button is-primary">Place an order</button>
-          </div>
+        {!!errorInput && (
+          <p className="modal-buy-window__error">
+            {errorInput}
+          </p>
+        )}
+
+        {isPurchaseSuccess && (
+          <p className="modal-buy-window__success">
+            Your purchase was successfull!
+            <br />
+            Go back to the
+            <NavLink
+              to="/menu"
+              onClick={() => {
+                window.scrollTo(0, 0)
+                dispatch(actionsModal.setModalBuyActive(false))
+              }}
+              className="modal-buy-window__success__link"
+            >
+              Menu Page
+            </NavLink>
+          </p>
+        )}
       </form>
     </div>
   )

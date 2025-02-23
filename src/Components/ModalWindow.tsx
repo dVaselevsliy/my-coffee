@@ -60,7 +60,7 @@ export const ModalWindow: React.FC = () => {
   }, [])
 
   return (
-    <div ref={mouseRef} className="modal-window">
+    <div ref={mouseRef} className="modal-buy-window">
         <form className="box box-settings" onSubmit={handleSumbmitInput}>
         <div className="field">
           <div className="box-settings__delete">
@@ -79,7 +79,7 @@ export const ModalWindow: React.FC = () => {
               onChange={(event) => {
                 dispatch(actionsModal.setEmail(event.target.value))
               }}
-              className={`input ${
+              className={`input control--border field-font-family ${
                 errorInput === 'Email should not be empty' && 'is-danger'
               }`}
               type="email"
@@ -93,7 +93,7 @@ export const ModalWindow: React.FC = () => {
       </div>
 
       <div className="field">
-        <label className="label">Password</label>
+        <label className="label field-font-family">Password</label>
         <div className="control">
             <input
               required
@@ -101,7 +101,7 @@ export const ModalWindow: React.FC = () => {
               onChange={(event) => {
                 setPassword(event.target.value)
               }}
-              className={`input ${
+              className={`input control--border field-font-family ${
                 errorInput === 'Password should not be empty' && 'is-danger'
               }`}
               type="password"
@@ -115,7 +115,7 @@ export const ModalWindow: React.FC = () => {
           </h5>
       </div>
 
-      <button className="button is-primary">Sign in</button>
+      <button className="button yellow-btn field-font-family">Sign in</button>
     </form>
     </div>
   )

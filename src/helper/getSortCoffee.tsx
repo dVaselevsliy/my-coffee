@@ -2,48 +2,45 @@ import { Coffee } from "../types/Coffee"
 
 export const getSortCoffee = (
   productArray: Coffee[],
-  sort: number,
-  priceSort = false,
-  alphabeticallySort = false,
-  roastLevelSort = false,
+  activeSort: string
 ) => {
   const newArray = [...productArray]
-    
-      if (priceSort) {
-        if (sort === 1) {
-          return newArray.sort((sort1, sort2) => (
-            sort1.price - sort2.price
-          ))
-        } else if (sort === 2) {
-          return newArray.sort((sort1, sort2) => (
-            sort2.price - sort1.price
-          ))
-        }
-      }
-  
-      if (alphabeticallySort) {
-        if (sort === 1) {
-          return newArray.sort((sort1, sort2) => (
-            sort1.name.localeCompare(sort2.name)
-          ))
-        } else if (sort === 2) {
-          return newArray.sort((sort1, sort2) => (
-            sort2.name.localeCompare(sort1.name)
-          ))
-        }
-      }
-  
-      if (roastLevelSort) {
-        if (sort === 1) {
-          return newArray.sort((sort1, sort2) => (
-            sort1.roast_level - sort2.roast_level
-          ))
-        } else if (sort === 2) {
-          return newArray.sort((sort1, sort2) => (
-            sort2.roast_level - sort1.roast_level
-          ))
-        }
-      }
-  
+
+  switch (activeSort) {
+    case 'all':
       return newArray
+    
+    case 'price-low-high':
+      return newArray.sort((sort1, sort2) => (
+        sort1.price - sort2.price
+      ))
+    
+    case 'price-high-low':
+      return newArray.sort((sort1, sort2) => (
+        sort2.price - sort1.price
+      ))
+    
+    case 'alphabetically-asc':
+      return newArray.sort((sort1, sort2) => (
+        sort1.name.localeCompare(sort2.name)
+      ))
+    
+    case 'alphabetically-desc':
+      return newArray.sort((sort1, sort2) => (
+        sort2.name.localeCompare(sort1.name)
+      ))
+    
+    case 'roast-level-low-high':
+      return newArray.sort((sort1, sort2) => (
+        sort1.roast_level - sort2.roast_level
+      ))
+    
+    case 'roast-level-high-low':
+      return newArray.sort((sort1, sort2) => (
+        sort2.roast_level - sort1.roast_level
+      ))
+    
+    default:
+      return newArray
+  }
 }

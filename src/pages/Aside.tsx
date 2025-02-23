@@ -1,27 +1,34 @@
 import { NavLink } from 'react-router-dom'
 import iconClose from '../images/icon-close.png'
 import { ModalWindow } from '../Components/ModalWindow'
-import { useAppSelector } from '../redux/hooks'
+import { useAppDispatch, useAppSelector } from '../redux/hooks'
+import { actions as actionsModal } from '../reducers/modalContent'
 
 export const Aside = () => {
   const { modal } = useAppSelector(state => state.modal)
+  const dispatch = useAppDispatch()
 
   return (
-    <aside className="aside page__aside">
+    <aside className="aside page__aside ">
       {modal.modalActive && 
         <ModalWindow />
       }
-      <div className="header__top">
+      <div className="header__top section-padding">
         <span className="header__bean-scene">Bean Scene</span>
           {!modal.signIn && (
-            <div className="header__sign-in">
-              <div className="header__button">
-                <a className="header__sign-in--text-black" href="#">SignUp</a>
-              </div>
+          <div
+            onClick={() => {
+            dispatch(actionsModal.setModalActive(!modal.modalActive))
+            }}
+            className="header__sign-in">
+              <span className="yellow-btn">SignUp</span>
             </div>
           )}
             <a href='#'>
-              <img src={iconClose} alt="bottom-close" />
+          <img
+            className='header__bottom-close'
+            src={iconClose} alt="bottom-close"
+          />
             </a>
       </div>
       

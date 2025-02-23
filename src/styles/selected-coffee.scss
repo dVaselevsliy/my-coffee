@@ -15,8 +15,33 @@
 .selected-coffee {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  box-sizing: border-box;
-  overflow: hidden;
+  min-height: 100vh;
+
+  @media (max-width: 1250px) {
+    grid-template-columns: repeat(1, 1fr);
+    justify-self: center;
+    margin-bottom: 100px;
+    justify-content: center;
+  }
+
+  &__image-section,
+  &__title-section {
+    margin: 150px 0 40px;
+  }
+
+  &__image-section {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #eccd9f;
+    background-color: #FFF9F1;
+  }
+
+  &__image {
+    background-color: papayawhip;
+    width: 100%;
+    height: calc(100% - 50px);
+    object-fit: cover;
+  }
 
   &__false {
     display: flex;
@@ -31,16 +56,9 @@
     }
   }
 
-  @media (max-width: 1250px) {
-    grid-template-columns: repeat(1, 1fr);
-    justify-self: center;
-    margin-bottom: 100px;
-    justify-content: center;
-  }
-
   &__title {
     display: flex;
-    font-size: 25px;
+    font-size: 36px;
     font-weight: bold;
     margin-bottom: 30px;
 
@@ -50,40 +68,27 @@
   }
 
   &__order-button {
-    margin: 20px;
-    margin-top: 110px;
-  }
-
-  &__order-sent-div {
-    display: flex;
-    position: relative;
-    margin: 20px;
-
-
-  }
-  
-  &__order-sent {
-    margin: auto;
-    font-size: 87px;
-    color: #41702a;
-    font-weight: bold;
-    margin-top: 140px;
-    margin-bottom: 565px;
-
-    @media (max-width: 650px) {
-      font-size: 48px;
-    }
-    
+    position: absolute;
+    left: 30px;
+    top: 110px;
+    padding-left: 30px;
+    border: none;
+    font-size: 16px;
+    font-family: "Playfair Display", serif;
+    background-image: url(/my-coffee/public/arrow-left.png);
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position-y: center;
+    background-size: 16px;
   }
 
   &__title-section {
     display: flex;
     flex-direction: column;
-    align-self: center;
+    justify-content: center;
     color: #433d3d;
-    font-weight: bold;
-    font-size: 25px;
-    margin-top: 221px;
+    font-size: 20px;
+    padding-inline: 30px;
 
     @media (max-width: 550px) {
       font-size: 18px;
@@ -98,6 +103,7 @@
 
   &__price {
     font-size: 27px;
+    margin-block: 20px;
     font-weight: bold;
     color: #433d3d;
     display: flex;
@@ -110,20 +116,6 @@
     @media (max-width: 550px) {
       font-size: 18px;
     }
-  }
-
-  &__image {
-    max-width: 900px;
-    margin-top: 120px;
-
-    @media (max-width: 1250px) {
-      max-width: 630px;
-      display: flex;
-    }
-  }
-
-  &__image-section {
-    justify-self: center;
   }
 
   &__paragraf {
@@ -144,46 +136,8 @@
   }
 
   &__button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 136px;
-    height: 61px;
-    border-radius: 24px;
-    background-color: #cbeaea;
-    border: 1px solid #2b2727;
+    margin-top: 30px;
+    max-width: 250px;
     transition: all 0.3s ease-in-out;
-    cursor: pointer;
-    color: #3f3939;
-    font-size: 25px;
-    font-weight: bold;
-
-    &:active {
-      animation: pulseEffect 0.3s ease-out;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      background: linear-gradient(45deg, #cbeaea, #8fd5d5);
-    }
-  
-    @keyframes pulseEffect {
-      0% {
-        transform: scale(0.95);
-      }
-      50% {
-        transform: scale(1);
-      }
-      100% {
-        transform: scale(0.98);
-      }
-    }
   }
-}
-
-.footer-margin-top {
-  margin-top: 200px;
-}
-
-.back-button-order {
-  position: absolute;
-  top: 20px;
-  z-index: 1;
 }

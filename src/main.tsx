@@ -5,7 +5,7 @@ import {Route, HashRouter as Router, Routes} from 'react-router-dom'
 import { NotFoundPage } from './pages/NotFoundPage'
 import { store } from './redux/store'
 import { HomePage } from './pages/HomePage'
-import { ProductsPage } from './pages/ProductPage'
+import { ProductsPage } from './pages/ProductsPage'
 import { Aside } from './pages/Aside'
 import { Provider } from 'react-redux';
 import { SelectedCoffee } from './pages/SelectedCoffee';

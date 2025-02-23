@@ -1,0 +1,22 @@
+.control {
+
+  &__margin {
+    margin-block: 20px;
+  }
+  
+  &--border {
+    border: 2px solid #ffe08a;
+
+    &:hover {
+      border: 2px solid #ffe08a;
+    }
+    &:focus {
+      border: 2px solid #ffe08a;
+    }
+  }
+}
+
+
+.field-font-family {
+  font-family: "Playfair Display", serif; 
+}

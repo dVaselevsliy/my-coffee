@@ -46,19 +46,101 @@ img {
   align-items: center;
   height: 48px;
   min-width: 100px;
+  border: none;
   border-radius: 24px;
   padding-inline: 20px;
   background-color: #F9C06A;
   color: #1E1E1E;
+  font-family: "Playfair Display", serif;
   font-weight: bold;
   font-size: 16px;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
+
+  &:hover {
+    background-color: #ffd79b;
+  }
 }
 
 .title {
   font-size: 50px;
   color: #7e4b10;
   font-weight: bold;
+}
+
+.paragraph {
+  color: #707070;
+  line-height: 34px;
+  font-size: 20px;
+}
+
+.input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.button-read-more {
+  color: #2b2727;
+  font-size: inherit;
+  font-weight: bold;
+  text-align: center;
+  margin: 0 10px;
+  text-decoration: underline;
+}
+
+.white-color {
+  color: #fff;
+}
+
+/* general styles for carousel component */
+.carousel {
+  position: relative;
+  margin-top: 50px;
+
+  &__wrapper {
+    overflow: hidden;
+  }
+
+  &__container {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  &__arrow-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  &__button {
+    position: absolute;
+    width: 82px;
+    height: 82px;
+    top: 50%;
+    border: none;
+    background-color: #F9C06A;
+    border-radius: 16px;
+    cursor: pointer;
+
+    @media (max-width: 1200px) {
+      width: 62px;
+      height: 62px;
+    }
+
+    @media (max-width: 720px) {
+      height: 44px;
+      width: 44px;
+      border-radius: 12px;
+    }
+  }
+
+  &__button.right {
+    right: 0;
+    transform: translate(50%, -100%);
+  }
+  
+  &__button.left {
+    left: 0;
+    transform: translate(-50%, -100%);
+  }
 }
 
