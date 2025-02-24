@@ -1,3 +1,7 @@
+GitHub repository: https://github.com/dVaselevsliy/my-coffee
+Live version: https://dvaselevsliy.github.io/my-coffee/
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
